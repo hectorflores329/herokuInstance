@@ -17,5 +17,7 @@ def index():
 
     return folium_map._repr_html_()
 
+    print("Este es un mensaje de prueba.")
+
 if __name__ == "__main__":
     app.run()
