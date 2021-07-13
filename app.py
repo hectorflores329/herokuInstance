@@ -3,8 +3,8 @@ import pandas as pd
 import folium
 from folium.plugins import HeatMapWithTime
 
-df = pd.DataFrame({'col1': ['abc', 'def', 'tre'],
-                   'col2': ['foo', 'bar', 'stuff']})
+df = pd.DataFrame({'col1': [10,20, 30],
+                   'col2': [120, 150, 200]})
 
 app = Flask(__name__)
 
