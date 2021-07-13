@@ -15,7 +15,8 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     # return df.to_html(header="true", table_id="table")
-    return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
+    return map._repr_html_()
+    # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
 if __name__ == '__main__':
     app.run()
