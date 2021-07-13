@@ -13,9 +13,9 @@ df = pd.DataFrame({'A': [0, 1, 2, 3, 4],
 @app.route('/', methods=("POST", "GET"))
 def html_table():
 
-    return render_template('simple.html',  tables=[df.to_html(classes='data')], titles=df.columns.values)
+    return render_template('simple.html',  tables=[df.to_html(classes='data', header="true")])
 
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
