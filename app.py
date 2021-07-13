@@ -13,7 +13,7 @@ def hello_world():
 
     
     map_Oslo = folium.Map(location=[-33.48621795345005, -70.66557950912359], zoom_start=5)
-   
+    HeatMapWithTime(df, radius=10).add_to(map_Oslo)
     
 
     return map_Oslo._repr_html_()
