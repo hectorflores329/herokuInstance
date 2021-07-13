@@ -11,7 +11,7 @@ app = Flask(__name__)
 def index():
 
 
-    folium_map = folium.Map(location = [9.0820, 8.6753],tiles = "Mapbox Control Room", zoom_start = 6, min_zoom = 6, max_zoom = 7, max_lat =16 , max_lon =15 , min_lat = 2 , min_lon =1, max_bounds = True )
+    folium_map = folium.Map(location = [-33.41517714138071, -70.6669528001506],tiles = "Mapbox Control Room", zoom_start = 6, min_zoom = 6, max_zoom = 7, max_lat =16 , max_lon =15 , min_lat = 2 , min_lon =1, max_bounds = True )
 
     folium.LayerControl().add_to(folium_map) 
 
