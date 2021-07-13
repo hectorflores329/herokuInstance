@@ -2,12 +2,13 @@ from flask import Flask
 import folium
 import pandas as pd
 
+app = Flask(__name__)
+
 # Importing Data
 df = pd.read_csv('mta_1712.csv', error_bad_lines=False)
 
 # Getting data for 1 December 2017
 df=df[df['RecordedAtTime'].str.split(' ').apply(lambda x:x[0]=='2017-12-01')]
-df.shape
 
 df=df[['RecordedAtTime','VehicleRef','VehicleLocation.Latitude','VehicleLocation.Longitude']]
 df.duplicated().value_counts()
@@ -32,7 +33,7 @@ for i in range(1,25):
         temp.append([instance['VehicleLocation.Latitude'],instance['VehicleLocation.Longitude']])
     lat_long_list.append(temp)
 
-app = Flask(__name__)
+
 
 
 @app.route("/")
