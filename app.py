@@ -1,11 +1,12 @@
 from flask import Flask
 import folium
+from django.shortcuts import render
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def base():
+def show_map(request):
     m = folium.Map(location=[55.17, 51.00], tiles='OpenStreetMap', name="Light Map",
                    zoom_start=6, attr="My Data attribution")
     folium.features.GeoJson(data= "all_id.geojson"
