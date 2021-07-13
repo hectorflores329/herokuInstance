@@ -1,21 +1,16 @@
-from flask import Flask, request, render_template, session, redirect
-import numpy as np
+from flask import *
 import pandas as pd
-
-
 app = Flask(__name__)
 
-df = pd.DataFrame({'A': [0, 1, 2, 3, 4],
-                   'B': [5, 6, 7, 8, 9],
-                   'C': ['a', 'b', 'c--', 'd', 'e']})
+@app.route("/tables")
+def show_tables():
+    data = pd.read_excel('dummy_data.xlsx')
+    data.set_index(['Name'], inplace=True)
+    data.index.name=None
+    females = data.loc[data.Gender=='f']
+    males = data.loc[data.Gender=='m']
+    return render_template('view.html',tables=[females.to_html(classes='female'), males.to_html(classes='male')],
+    titles = ['na', 'Female surfers', 'Male surfers'])
 
-
-@app.route('/', methods=("POST", "GET"))
-def html_table():
-
-    return render_template('simple.html',  tables=[df.to_html(classes='data', header="true")])
-
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(debug=True)
