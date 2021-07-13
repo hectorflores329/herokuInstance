@@ -1,8 +1,7 @@
 from flask import Flask
 import pandas as pd
 
-df = pd.DataFrame({'col1': ['abc', 'def', 'tre'],
-                   'col2': ['foo', 'bar', 'stuff']})
+df = pd.read_csv("mta_1712.csv")
 
 
 app = Flask(__name__)
