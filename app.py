@@ -8,7 +8,12 @@ app = Flask(__name__)
 def base():
     # this is base map
     map = folium.Map(
-        location=[-33.48621795345005, -70.66557950912359]
+        location=[-33.48621795345005, -70.66557950912359],
+        width = 550,
+        height = 350,
+        zoom_start = 11,
+        min_zoom = 8,
+        max_zoom = 14
     )
     return map._repr_html_()
 
