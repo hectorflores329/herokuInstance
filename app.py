@@ -263,7 +263,7 @@ app = Flask(__name__)
 def hello_world():
 
     
-    map_Oslo = folium.Map(
+    _map = folium.Map(
         location=[40.712776, -74.005974],
         zoom_start=5,
         width = 850,
@@ -272,11 +272,12 @@ def hello_world():
         max_zoom = 14
         )
 
-    HeatMapWithTime(lat_long_list2, radius=10, gradient={0.1: 'blue', 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 0.8: 'red', 0.99: 'purple'},
-                    min_opacity=0.5, max_opacity=0.8, use_local_extrema=False, auto_play=True,position='bottomright').add_to(map_Oslo)
+    '''HeatMapWithTime(lat_long_list2, radius=10, gradient={0.1: 'blue', 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 0.8: 'red', 0.99: 'purple'},
+                    min_opacity=0.5, max_opacity=0.8, use_local_extrema=False, auto_play=True,position='bottomright').add_to(map_Oslo)'''
+    HeatMapWithTime(lat_long_list2, radius=5, auto_play=True, position='bottomright').add_to(_map)
     
 
-    return map_Oslo._repr_html_()
+    return _map._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
 if __name__ == '__main__':
