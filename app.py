@@ -8,7 +8,7 @@ def index():
     return "Hola, este es un ejemplo, texto modificado."
 
 @app.route("/nuevapagina")
-def index():
+def another():
     return "Hola, este es un ejemplo en otra página."
 
 
