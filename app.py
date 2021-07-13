@@ -5,7 +5,7 @@ from folium.plugins import HeatMapWithTime
 
 df = pd.DataFrame({'col1': ['10',20, 30],
                    'col2': [120, 150, 200]})
-time = ['2018-07-04 08:11:54.170000','2018-07-04 08:15:01.910000', '2018-06-04 08:23:09.700000']
+
 
 lat_long_list2 = [[[40.784217, -73.846007],
   [40.762797, -73.865112],
@@ -276,7 +276,7 @@ def hello_world():
     '''HeatMapWithTime(lat_long_list2, radius=10, gradient={0.1: 'blue', 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 0.8: 'red', 0.99: 'purple'},
                     min_opacity=0.5, max_opacity=0.8, use_local_extrema=False, auto_play=True,position='bottomright').add_to(map_Oslo)'''
 
-    HeatMapWithTime(lat_long_list2, index=time, radius=5, auto_play=True, position='bottomleft').add_to(_map)
+    HeatMapWithTime(lat_long_list2, radius=5, auto_play=True, position='bottomleft').add_to(_map)
     
 
     return _map._repr_html_()
