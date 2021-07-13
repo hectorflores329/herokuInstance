@@ -263,7 +263,15 @@ app = Flask(__name__)
 def hello_world():
 
     
-    map_Oslo = folium.Map(location=[40.712776, -74.005974], zoom_start=5)
+    map_Oslo = folium.Map(
+        location=[40.712776, -74.005974],
+        zoom_start=5,
+        width = 850,
+        height = 650,
+        min_zoom = 8,
+        max_zoom = 14
+        )
+
     HeatMapWithTime(lat_long_list2, radius=10, gradient={0.1: 'blue', 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 0.8: 'red', 0.99: 'purple'},
                     min_opacity=0.5, max_opacity=0.8, use_local_extrema=False).add_to(map_Oslo)
     
