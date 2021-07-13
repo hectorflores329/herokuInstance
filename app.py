@@ -274,7 +274,7 @@ def hello_world():
 
     '''HeatMapWithTime(lat_long_list2, radius=10, gradient={0.1: 'blue', 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 0.8: 'red', 0.99: 'purple'},
                     min_opacity=0.5, max_opacity=0.8, use_local_extrema=False, auto_play=True,position='bottomright').add_to(map_Oslo)'''
-    HeatMapWithTime(lat_long_list2, radius=5, auto_play=True, position='bottomright').add_to(_map)
+    # HeatMapWithTime(lat_long_list2, radius=5, auto_play=True, position='bottomright').add_to(_map)
     
 
     return _map._repr_html_()
