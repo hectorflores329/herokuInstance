@@ -7,6 +7,6 @@ app = Flask(__name__)
 def index():
     return "Hola, este es un ejemplo."
 
-
-if __name__ == "__main__":
-    app.run()
+@app.route("/nuevapagina")
+def index():
+    return "Hola, este es un ejemplo."
