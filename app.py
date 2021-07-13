@@ -1,12 +1,15 @@
 from flask import Flask
 import folium
 import pandas as pd
+from folium import plugins
+from folium.plugins import HeatMap
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def base():
+    df = pd.read_csv("mta_1712.csv")
 
     # this is base map
     map = folium.Map(
