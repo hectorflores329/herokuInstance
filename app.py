@@ -39,7 +39,12 @@ def hello_world():
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
-      
+    
+    folium.Marker(
+        location=[48.0, 5.0],
+        popup="Este es un ícono o marca",
+        icon=folium.Icon(icon="cloud"),
+    ).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
