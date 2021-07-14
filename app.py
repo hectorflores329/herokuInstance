@@ -19,8 +19,7 @@ def hello_world():
 
     new_map = folium.Map(location=[40.712776, -74.005974], tiles= "Puntos",min_zoom=2, zoom_start=2, max_zoom=3)
 
-    hm = HeatMapWithTime(Confirmed_df,auto_play=True,max_opacity=0.8)
-    hm.add_to(new_map)    
+    HeatMapWithTime(Confirmed_df,auto_play=True,max_opacity=0.8).add_to(new_map)   
 
     return new_map._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
