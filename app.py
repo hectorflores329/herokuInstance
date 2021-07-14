@@ -29,14 +29,14 @@ def hello_world():
 
     m = folium.Map(
         location=[48.0, 5.0],
-        zoom_start=5,
+        zoom_start=10,
         width = 850,
         height = 650,
         min_zoom = 8,
         max_zoom = 14
         )
 
-    hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3)
+    hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
       
