@@ -46,6 +46,15 @@ def hello_world():
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
+    folium.CircleMarker(
+        location=[48.0, 5.0],
+        radius=50,
+        popup="Laurelhurst Park",
+        color="#3186cc",
+        fill=True,
+        fill_color="#3186cc",
+    ).add_to(m)
+
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
