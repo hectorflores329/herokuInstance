@@ -1,3 +1,4 @@
+from flask import Flask
 import folium
 import folium.plugins as plugins
 import numpy as np
