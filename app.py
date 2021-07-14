@@ -27,7 +27,14 @@ def hello_world():
         for row in time_entry:
             row.append(weight)
 
-    m = folium.Map([48.0, 5.0], tiles="stamentoner", zoom_start=6)
+    m = folium.Map(
+        location=[48.0, 5.0],
+        zoom_start=5,
+        width = 850,
+        height = 650,
+        min_zoom = 8,
+        max_zoom = 14
+        )
 
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3)
 
