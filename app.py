@@ -29,10 +29,10 @@ def hello_world():
 
     m = folium.Map(
         location=[48.0, 5.0],
-        # zoom_start=2,
+        zoom_start=2,
         width = 850,
         height = 650,
-        min_zoom = 40,
+        min_zoom = 8,
         max_zoom = 30
         )
 
