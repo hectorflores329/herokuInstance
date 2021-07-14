@@ -7,6 +7,10 @@ df = pd.DataFrame({'Lat': [40.784217, 40.762797, 40.721856, 40.755798, 40.711786
                    'Long': [-73.846007, -73.865112, -73.852954, -73.940719, -73.859124],
                    'Confirmed': [20, 30, 40, 50, 60]})
 
+df['Lat'] = df['Lat'].astype(float)
+df['Long'] = df['Long'].astype(float)
+
+Confirmed_df = df[['Lat', 'Long','Confirmed']]
 
 app = Flask(__name__)
 
@@ -14,11 +18,6 @@ app = Flask(__name__)
 def hello_world():
 
     new_map = folium.Map(location=[40.712776, -74.005974], tiles= "Puntos",min_zoom=2, zoom_start=2, max_zoom=3)
-
-    df['Lat'] = df['Lat'].astype(float)
-    df['Long'] = df['Long'].astype(float)
-
-    Confirmed_df = df[['Lat', 'Long','Confirmed']]
 
     hm = HeatMapWithTime(Confirmed_df,auto_play=True,max_opacity=0.8)
     hm.add_to(new_map)    
