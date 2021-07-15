@@ -31,17 +31,7 @@ def hello_world():
             row.append(weight)
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
-
-    N = 100
-    data2 = np.array(
-        [
-            np.random.uniform(low=35, high=60, size=N),  # Random latitudes in Europe.
-            np.random.uniform(low=-12, high=30, size=N),  # Random longitudes in Europe.
-        ]
-    ).T
-    popups = [str(i) for i in range(N)]  # Popups texts are simple numbers.
-
-
+    
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
         zoom_start=2,
@@ -66,7 +56,7 @@ def hello_world():
 
     hm.add_to(m)
     
-    folium.Marker(
+    '''folium.Marker(
         location=[-33.48621795345005, -70.66557950912359],
         popup="Esto es una marca estática.",
         icon=folium.Icon(icon="cloud"),
@@ -79,7 +69,7 @@ def hello_world():
         color="#3186cc",
         fill=True,
         fill_color="#3186cc",
-    ).add_to(m)
+    ).add_to(m)'''
 
     folium.TileLayer('openstreetmap').add_to(m)
     folium.TileLayer('cartodbpositron').add_to(m)
@@ -98,8 +88,6 @@ def hello_world():
 
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
-
-    plugins.MarkerCluster(data2, popups=popups).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
