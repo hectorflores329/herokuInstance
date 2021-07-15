@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route('/')
 def mapa():
 
-    data = pd.DataFrame({
+    _data = pd.DataFrame({
         'lon':[-58, 2, 145, 30.32, -4.03, -73.57, 36.82, -38.5],
         'lat':[-34, 49, -38, 59.93, 5.33, 45.52, -1.29, -12.97],
         'name':['Buenos Aires', 'Paris', 'melbourne', 'St Petersbourg', 'Abidjan', 'Montreal', 'Nairobi', 'Salvador'],
@@ -97,11 +97,10 @@ def mapa():
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
 
-    for i in range(0,len(data)):
+    for i in range(0,len(_data)):
         folium.Marker(
-            location=[data.iloc[i]['lat'], data.iloc[i]['lon']],
-            popup=data.iloc[i]['name'],
-            icon=folium.Icon(icon="cloud"),
+            location=[_data.iloc[i]['lat'], _data.iloc[i]['lon']],
+            popup=_data.iloc[i]['name']
         ).add_to(m)
 
     return m._repr_html_()
