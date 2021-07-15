@@ -67,6 +67,11 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
+    folium.TileLayer('Stamen Terrain').add_to(m)
+    folium.TileLayer('cartodbpositron').add_to(m)
+    folium.TileLayer('cartodbdark_matter').add_to(m)
+    folium.LayerControl().add_to(m)
+
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
