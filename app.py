@@ -4,6 +4,7 @@ import folium.plugins as plugins
 import numpy as np
 from datetime import datetime, timedelta
 from folium.plugins import FloatImage
+from folium.plugins import Draw
 
 app = Flask(__name__)
 
@@ -77,7 +78,11 @@ def hello_world():
         "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
 
-    FloatImage(url, bottom=40, left=65).add_to(m)
+    FloatImage(url, bottom=5, left=10).add_to(m)
+
+    draw = Draw(export=True, name="Exportar")
+
+    draw.add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
