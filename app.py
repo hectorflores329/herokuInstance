@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
+from folium.plugins import MarkerCluster
 
 app = Flask(__name__)
 
@@ -36,7 +37,16 @@ def hello_world():
     lats = np.random.randint(-90, 90, size=size)
 
     locations = list(zip(lats, lons))
-    popups = ["lon:{}<br>lat:{}".format(lon, lat) for (lat, lon) in locations]
+    popups = ["lon:{}<br>lat:{}".format(-33.48621795345005, -70.66557950912359) for (-33.48621795345005, -70.66557950912359) in locations]
+
+    icon_create_function = """\
+    function(cluster) {
+        return L.divIcon({
+        html: '<b>' + cluster.getChildCount() + '</b>',
+        className: 'marker-cluster marker-cluster-large',
+        iconSize: new L.Point(20, 20)
+        });
+    }"""
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
@@ -86,11 +96,22 @@ def hello_world():
         "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
 
-    FloatImage(url, bottom=1, left=1).add_to(m)
+    FloatImage(url, bottom=1, left=3).add_to(m)
 
     draw = Draw(export=True)
 
     draw.add_to(m)
+
+    marker_cluster = MarkerCluster(
+        locations=locations,
+        popups=popups,
+        name="1000 clustered icons",
+        overlay=True,
+        control=True,
+        icon_create_function=icon_create_function,
+    )
+
+    marker_cluster.add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
