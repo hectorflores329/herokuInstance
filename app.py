@@ -16,7 +16,7 @@ def mapa():
     _data = pd.DataFrame({
         'lat':[-18.523171602611157, -20.081406746064033, -23.59873676994002, -27.23938743975787, -29.96370275016499, -33.047173911560314, -33.43809989010958, -34.39381185918305, -35.44477628689832, -36.595441980200604, -37.28730334091126, -38.70563226104338, -40.01699278867277, -41.03688009107713, -45.73070038865504, -52.2166525002859462],
         'lon':[-69.63145087536489, -69.43448162427181, -70.38826103180747, -69.7905950891039, -71.29217004776821, -71.62392382162052, -70.62712736036686, -71.17591266489721, -71.40116279394256, -72.02111747509933, -72.46656376159729, -72.23016045899877, -72.64926437255212, -73.1082958286221, -72.79822387430552, -72.1980173424485],
-        'name':['Región de Arica y Parinacota', 'Región de Tarapacá', 'Región de Antofagasta.', 'Región de Atacama', 'Región de Coquimbo', 'Región de Valparaíso', 'Región Metropolitana de Santiago', 'Región del Libertador General Bernardo O’Higgin', 'Región del Maule', 'Región del Ñubl', 'Región del Biobío', 'Región de La Araucanía', 'Región de Los Río', 'Región de Los Lagos', 'Región de Aysén del General Carlos Ibáñez del Campo', 'Región de Magallanes y la Antártica Chilena'],
+        'name':['Región de Arica y Parinacota', 'Región de Tarapacá', 'Región de Antofagasta.', 'Región de Atacama', 'Región de Coquimbo', 'Región de Valparaíso', 'Región Metropolitana de Santiago', 'Región del Libertador General Bernardo O’Higgin', 'Región del Maule', 'Región del Ñuble', 'Región del Biobío', 'Región de La Araucanía', 'Región de Los Río', 'Región de Los Lagos', 'Región de Aysén del General Carlos Ibáñez del Campo', 'Región de Magallanes y la Antártica Chilena'],
         'value':[10, 12, 40, 70, 23, 43, 100, 43, 90, 100, 11, 48, 79, 82, 49, 17]
     })
 
@@ -100,7 +100,8 @@ def mapa():
     for i in range(0,len(_data)):
         folium.Marker(
             location = [_data.iloc[i]['lat'], _data.iloc[i]['lon']],
-            popup =_data.iloc[i]['name']
+            popup =_data.iloc[i]['name'],
+            name="Puntos, regiones chilenas",
         ).add_to(m)
 
     return m._repr_html_()
