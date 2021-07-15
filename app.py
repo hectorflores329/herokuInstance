@@ -33,13 +33,13 @@ def hello_world():
         location=[48.0, 5.0],
         zoom_start=2,
         min_zoom = 8,
-        max_zoom = 30,
-        tiles = atlas
+        max_zoom = 30
+        # tiles = atlas
         )
 
     naip_url = 'https://services.nationalmap.gov/arcgis/services/USGSNAIPImagery/ImageServer/WMSServer?'
     m.add_wms_layer(url=naip_url, layers='0', name='NAIP Imagery', format='image/png', shown=True)
-
+    
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
