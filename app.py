@@ -11,7 +11,7 @@ def hello_world():
 
     np.random.seed(3141592)
     initial_data = np.random.normal(size=(100, 2)) * np.array([[1, 1]]) + np.array(
-        [[48, 5]]
+        [[-33.48621795345005, -70.66557950912359]]
     )
 
     move_data = np.random.normal(size=(100, 2)) * 0.01
@@ -53,15 +53,15 @@ def hello_world():
     hm.add_to(m)
     
     folium.Marker(
-        location=[48.0, 5.0],
-        popup="Esto es una marca",
+        location=[-33.48621795345005, -70.66557950912359],
+        popup="Esto es una marca estática.",
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
     folium.CircleMarker(
-        location=[48.0, 5.0],
+        location=[-33.047971387856414, -71.61855844930044],
         radius=50,
-        popup="Circunferencia",
+        popup="Circunferencia estática ubicada en Valparaíso.",
         color="#3186cc",
         fill=True,
         fill_color="#3186cc",
