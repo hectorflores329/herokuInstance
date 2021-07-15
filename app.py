@@ -3,6 +3,7 @@ import folium
 import folium.plugins as plugins
 import numpy as np
 from datetime import datetime, timedelta
+from folium.plugins import FloatImage
 
 app = Flask(__name__)
 
@@ -71,6 +72,14 @@ def hello_world():
     folium.TileLayer('cartodbpositron').add_to(m)
     folium.TileLayer('cartodbdark_matter').add_to(m)
     folium.LayerControl().add_to(m)
+
+    url = (
+        "https://raw.githubusercontent.com/SECOORA/static_assets/master/maps/img/rose.png"
+    )
+
+    m = folium.Map([-13, -38.15], zoom_start=10)
+
+    FloatImage(url, bottom=40, left=65).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
