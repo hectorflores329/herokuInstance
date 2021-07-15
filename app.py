@@ -98,7 +98,7 @@ def hello_world():
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
 
-    plugins.MarkerCluster(data, popups=popups).add_to(m)
+    plugins.MarkerCluster(data2, popups=popups).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
