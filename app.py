@@ -2,6 +2,7 @@ from flask import Flask
 import folium
 import folium.plugins as plugins
 import numpy as np
+import pandas as pd
 from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
@@ -10,7 +11,14 @@ from folium.plugins import MiniMap
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def mapa():
+
+    data = pd.DataFrame({
+        'lon':[-58, 2, 145, 30.32, -4.03, -73.57, 36.82, -38.5],
+        'lat':[-34, 49, -38, 59.93, 5.33, 45.52, -1.29, -12.97],
+        'name':['Buenos Aires', 'Paris', 'melbourne', 'St Petersbourg', 'Abidjan', 'Montreal', 'Nairobi', 'Salvador'],
+        'value':[10, 12, 40, 70, 23, 43, 100, 43]
+    }, dtype=str)
 
     np.random.seed(3141592)
     initial_data = np.random.normal(size=(100, 2)) * np.array([[1, 1]]) + np.array(
@@ -56,13 +64,13 @@ def hello_world():
 
     hm.add_to(m)
     
-    folium.Marker(
+    '''folium.Marker(
         location=[-33.48621795345005, -70.66557950912359],
         popup="Esto es una marca estática.",
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
-    '''folium.CircleMarker(
+    folium.CircleMarker(
         location=[-33.047971387856414, -71.61855844930044],
         radius=50,
         popup="Circunferencia estática ubicada en Valparaíso.",
