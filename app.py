@@ -42,7 +42,7 @@ def mapa():
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=1,
+        zoom_start=5,
         min_zoom = 8,
         max_zoom = 30,
         control_scale=True
@@ -96,6 +96,12 @@ def mapa():
 
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
+
+    for i in range(0,len(data)):
+        folium.Marker(
+        location=[data.iloc[i]['lat'], data.iloc[i]['lon']],
+        popup=data.iloc[i]['name'],
+    ).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
