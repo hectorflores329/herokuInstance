@@ -37,6 +37,16 @@ def hello_world():
         tiles = "openstreetmap"
         )
 
+    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
+                        layers = 'chile:Regiones',
+                        format ='image/png',
+                        transparent = True,
+                        name = "Regiones",
+                        control = True
+                        )
+
+    w.add_to(m)
+
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
@@ -55,16 +65,6 @@ def hello_world():
         fill=True,
         fill_color="#3186cc",
     ).add_to(m)
-
-    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
-                        layers = 'chile:Regiones',
-                        format ='image/png',
-                        transparent = True,
-                        name = "Regiones",
-                        control = True
-                        )
-
-    w.add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
