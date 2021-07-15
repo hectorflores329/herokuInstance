@@ -33,13 +33,13 @@ def hello_world():
         location=[-33.48621795345005, -70.66557950912359],
         zoom_start=2,
         min_zoom = 8,
-        max_zoom = 30,
-        tiles = "openstreetmap"
+        max_zoom = 30
+        # tiles = "openstreetmap"
         )
 
     w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
                         layers = 'chile:Regiones',
-                        format ='image/png',
+                        fmt ='image/png',
                         transparent = True,
                         name = "Regiones",
                         control = True,
@@ -48,26 +48,26 @@ def hello_world():
 
     w.add_to(m)
 
-    hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
+    hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright', name="Puntos")
 
     hm.add_to(m)
     
     folium.Marker(
         location=[48.0, 5.0],
-        popup="Este es un ícono o marca",
+        popup="Esto es una marca",
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
     folium.CircleMarker(
         location=[48.0, 5.0],
         radius=50,
-        popup="Laurelhurst Park",
+        popup="Circunferencia",
         color="#3186cc",
         fill=True,
         fill_color="#3186cc",
     ).add_to(m)
 
-    folium.TileLayer('Stamen Terrain').add_to(m)
+    folium.TileLayer('openstreetmap').add_to(m)
     folium.TileLayer('cartodbpositron').add_to(m)
     folium.TileLayer('cartodbdark_matter').add_to(m)
     folium.LayerControl().add_to(m)
