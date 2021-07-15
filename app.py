@@ -33,7 +33,7 @@ def hello_world():
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=2,
+        zoom_start=4,
         min_zoom = 8,
         max_zoom = 30
         # tiles = "openstreetmap"
@@ -80,7 +80,7 @@ def hello_world():
 
     FloatImage(url, bottom=5, left=10).add_to(m)
 
-    draw = Draw(export=True, name="Exportar")
+    draw = Draw(export=True)
 
     draw.add_to(m)
 
