@@ -99,10 +99,10 @@ def mapa():
 
     for i in range(0,len(data)):
         folium.Marker(
-        location=[data.iloc[i]['lat'], data.iloc[i]['lon']],
-        popup=data.iloc[i]['name'],
-        icon=folium.Icon(icon="cloud"),
-    ).add_to(m)
+            location=[data.iloc[i]['lat'], data.iloc[i]['lon']],
+            popup=data.iloc[i]['name'],
+            icon=folium.Icon(icon="cloud"),
+        ).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
