@@ -101,6 +101,7 @@ def mapa():
         folium.Marker(
         location=[data.iloc[i]['lat'], data.iloc[i]['lon']],
         popup=data.iloc[i]['name'],
+        icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
     return m._repr_html_()
