@@ -61,6 +61,7 @@ def hello_world():
                         )
 
     w.add_to(m)
+    folium.LayerControl().add_to(map)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
