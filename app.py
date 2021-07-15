@@ -56,14 +56,13 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
-    w = folium.WmsTileLayer(url='https://ide.dataintelligence-group.com/geoserver/chile/wms',
-                        layers='chile:Regiones'
+    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
+                        layers = 'chile:Regiones',
+                        format ='image/png',
+                        transparent = True
                         )
 
     w.add_to(m)
-
-    folium.TileLayer(w).add_to(map)
-    folium.LayerControl().add_to(map)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
