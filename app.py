@@ -34,7 +34,7 @@ def hello_world():
         zoom_start=2,
         min_zoom = 8,
         max_zoom = 30,
-        tiles="CartoDBPositronNoLabels"
+        tiles = atlas
         )
 
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
