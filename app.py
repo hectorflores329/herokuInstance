@@ -42,7 +42,8 @@ def hello_world():
                         format ='image/png',
                         transparent = True,
                         name = "Regiones",
-                        control = True
+                        control = True,
+                        attr = "Mapa de Chile"
                         )
 
     w.add_to(m)
