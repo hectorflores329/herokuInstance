@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
-from folium.plugins import MarkerCluster
+from folium.plugins import MiniMap
 
 app = Flask(__name__)
 
@@ -31,22 +31,6 @@ def hello_world():
             row.append(weight)
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
-
-    size = 100
-    lons = np.random.randint(-180, 180, size=size)
-    lats = np.random.randint(-90, 90, size=size)
-
-    locations = list(zip(lats, lons))
-    popups = ["lon:{}<br>lat:{}".format(-33.48621795345005, -70.66557950912359) for (-33.48621795345005, -70.66557950912359) in locations]
-
-    icon_create_function = """\
-    function(cluster) {
-        return L.divIcon({
-        html: '<b>' + cluster.getChildCount() + '</b>',
-        className: 'marker-cluster marker-cluster-large',
-        iconSize: new L.Point(20, 20)
-        });
-    }"""
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
@@ -102,16 +86,8 @@ def hello_world():
 
     draw.add_to(m)
 
-    marker_cluster = MarkerCluster(
-        locations=locations,
-        popups=popups,
-        name="1000 clustered icons",
-        overlay=True,
-        control=True,
-        icon_create_function=icon_create_function,
-    )
-
-    marker_cluster.add_to(m)
+    minimap = MiniMap(toggle_display=True)
+    minimap.add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
