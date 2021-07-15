@@ -27,7 +27,7 @@ def hello_world():
         for row in time_entry:
             row.append(weight)
 
-    
+    # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
     m = folium.Map(
         location=[48.0, 5.0],
@@ -37,9 +37,6 @@ def hello_world():
         # tiles = atlas
         )
 
-    naip_url = 'https://services.nationalmap.gov/arcgis/services/USGSNAIPImagery/ImageServer/WMSServer?'
-    m.add_wms_layer(url=naip_url, layers='0', name='NAIP Imagery', format='image/png', shown=True)
-    
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
@@ -59,6 +56,11 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
+    w = folium.WmsTileLayer(url='https://ide.dataintelligence-group.com/geoserver/glaciares/wms',
+                        layers='glaciares:porcR10_02_glaciar_zona_monitoreada'
+                        )
+
+    w.add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
