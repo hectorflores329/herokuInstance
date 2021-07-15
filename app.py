@@ -33,6 +33,12 @@ def hello_world():
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
     N = 100
+    data2 = np.array(
+        [
+            np.random.uniform(low=35, high=60, size=N),  # Random latitudes in Europe.
+            np.random.uniform(low=-12, high=30, size=N),  # Random longitudes in Europe.
+        ]
+    ).T
     popups = [str(i) for i in range(N)]  # Popups texts are simple numbers.
 
 
@@ -93,7 +99,7 @@ def hello_world():
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
 
-    plugins.MarkerCluster(data, popups=popups).add_to(m)
+    plugins.MarkerCluster(data2, popups=popups).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
