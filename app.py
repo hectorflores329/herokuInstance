@@ -56,8 +56,8 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
-    w = folium.WmsTileLayer(url='https://ide.dataintelligence-group.com/geoserver/glaciares/wms',
-                        layers='glaciares:porcR10_02_glaciar_zona_monitoreada'
+    w = folium.WmsTileLayer(url='https://ide.dataintelligence-group.com/geoserver/chile/wms',
+                        layers='chile:Regiones'
                         )
 
     w.add_to(m)
