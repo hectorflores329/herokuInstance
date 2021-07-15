@@ -32,6 +32,10 @@ def hello_world():
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
+    N = 100
+    popups = [str(i) for i in range(N)]  # Popups texts are simple numbers.
+
+
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
         zoom_start=2,
@@ -80,7 +84,7 @@ def hello_world():
         "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
 
-    FloatImage(url, bottom=1, left=3).add_to(m)
+    FloatImage(url, bottom=1, left=5).add_to(m)
 
     draw = Draw(export=True)
 
@@ -88,6 +92,8 @@ def hello_world():
 
     minimap = MiniMap(toggle_display=True)
     minimap.add_to(m)
+
+    plugins.MarkerCluster(data, popups=popups).add_to(m)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
