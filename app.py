@@ -30,11 +30,11 @@ def hello_world():
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
     m = folium.Map(
-        location=[48.0, 5.0],
+        location=[-33.48621795345005, -70.66557950912359],
         zoom_start=2,
         min_zoom = 8,
-        max_zoom = 30
-        # tiles = atlas
+        max_zoom = 30,
+        tiles = "openstreetmap"
         )
 
     hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright')
