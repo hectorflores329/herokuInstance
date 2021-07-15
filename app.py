@@ -74,10 +74,8 @@ def hello_world():
     folium.LayerControl().add_to(m)
 
     url = (
-        "https://github.com/hectorflores329/herokuinstance/blob/main/dataintelligence.png"
+        "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
-
-    m = folium.Map([-13, -38.15], zoom_start=10)
 
     FloatImage(url, bottom=40, left=65).add_to(m)
 
