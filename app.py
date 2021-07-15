@@ -18,7 +18,7 @@ def mapa():
         'lat':[-34, 49, -38, 59.93, 5.33, 45.52, -1.29, -12.97],
         'name':['Buenos Aires', 'Paris', 'melbourne', 'St Petersbourg', 'Abidjan', 'Montreal', 'Nairobi', 'Salvador'],
         'value':[10, 12, 40, 70, 23, 43, 100, 43]
-    }, dtype=str)
+    })
 
     np.random.seed(3141592)
     initial_data = np.random.normal(size=(100, 2)) * np.array([[1, 1]]) + np.array(
