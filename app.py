@@ -59,7 +59,9 @@ def hello_world():
     w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
                         layers = 'chile:Regiones',
                         format ='image/png',
-                        transparent = True
+                        transparent = True,
+                        name = "Regiones",
+                        control = True
                         )
 
     w.add_to(m)
