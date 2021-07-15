@@ -53,10 +53,10 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
-    m.add_wms_layer(wms_name="SST",
-                wms_url="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/analyses",
-                wms_format="image/png",
-                wms_layers='NCEP_RAS_ANAL_RTG_SST')
+    map.add_tile_layer(tile_name='hfradar 1km',
+                   tile_url='http://hfradar.ndbc.noaa.gov/tilesavg.php?s=10&e=100&x={x}&y={y}&z={z}&t=2014-8-18 14:00:00&rez=1')
+                   
+    folium.LayerControl().add_to(map)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
