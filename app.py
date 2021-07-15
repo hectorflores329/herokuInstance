@@ -27,7 +27,7 @@ def hello_world():
         for row in time_entry:
             row.append(weight)
 
-    atlas = folium.raster_layers.WmsTileLayer(url = 'https://sgx.geodatenzentrum.de/wms_webatlasde.light_grau?', layers='webatlasde.light_grau', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
+    atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True)
 
     m = folium.Map(
         location=[48.0, 5.0],
