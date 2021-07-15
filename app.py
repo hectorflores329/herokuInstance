@@ -56,13 +56,13 @@ def hello_world():
 
     hm.add_to(m)
     
-    '''folium.Marker(
-        location=[-33.48621795345005, -70.66557950912359],
+    folium.Marker(
+        location=[data],
         popup="Esto es una marca estática.",
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
-    folium.CircleMarker(
+    '''folium.CircleMarker(
         location=[-33.047971387856414, -71.61855844930044],
         radius=50,
         popup="Circunferencia estática ubicada en Valparaíso.",
@@ -80,7 +80,7 @@ def hello_world():
         "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
 
-    FloatImage(url, bottom=1, left=5).add_to(m)
+    FloatImage(url, bottom=1, left=8).add_to(m)
 
     draw = Draw(export=True)
 
