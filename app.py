@@ -31,11 +31,19 @@ def hello_world():
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
+    size = 100
+    lons = np.random.randint(-180, 180, size=size)
+    lats = np.random.randint(-90, 90, size=size)
+
+    locations = list(zip(lats, lons))
+    popups = ["lon:{}<br>lat:{}".format(lon, lat) for (lat, lon) in locations]
+
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=4,
+        zoom_start=2,
         min_zoom = 8,
-        max_zoom = 30
+        max_zoom = 30,
+        control_scale=True
         # tiles = "openstreetmap"
         )
 
