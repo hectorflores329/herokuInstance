@@ -48,7 +48,7 @@ def hello_world():
 
     w.add_to(m)
 
-    hm = plugins.HeatMapWithTime(data, index=time_index, auto_play=True, max_opacity=0.3, position='bottomright', name="Puntos")
+    hm = plugins.HeatMapWithTime(data, index=time_index, name="Puntos", auto_play=True, max_opacity=0.3, position='bottomright')
 
     hm.add_to(m)
     
