@@ -86,7 +86,7 @@ def hello_world():
         "https://github.com/hectorflores329/herokuinstance/raw/main/dataintelligence.png"
     )
 
-    FloatImage(url, bottom=5, left=10).add_to(m)
+    FloatImage(url, bottom=1, left=1).add_to(m)
 
     draw = Draw(export=True)
 
