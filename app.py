@@ -74,7 +74,7 @@ def hello_world():
     folium.LayerControl().add_to(m)
 
     url = (
-        "https://raw.githubusercontent.com/SECOORA/static_assets/master/maps/img/rose.png"
+        "dataintelligence.png"
     )
 
     m = folium.Map([-13, -38.15], zoom_start=10)
