@@ -61,6 +61,8 @@ def hello_world():
                         )
 
     w.add_to(m)
+
+    folium.TileLayer(w).add_to(map)
     folium.LayerControl().add_to(map)
 
     return m._repr_html_()
