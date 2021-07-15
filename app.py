@@ -30,8 +30,6 @@ def hello_world():
     m = folium.Map(
         location=[48.0, 5.0],
         zoom_start=2,
-        width = 850,
-        height = 650,
         min_zoom = 8,
         max_zoom = 30
         )
@@ -54,6 +52,11 @@ def hello_world():
         fill=True,
         fill_color="#3186cc",
     ).add_to(m)
+
+    m.add_wms_layer(wms_name="SST",
+                wms_url="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/analyses",
+                wms_format="image/png",
+                wms_layers='NCEP_RAS_ANAL_RTG_SST')
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
