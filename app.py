@@ -27,6 +27,8 @@ def hello_world():
         for row in time_entry:
             row.append(weight)
 
+    atlas = folium.raster_layers.WmsTileLayer(url = 'https://sgx.geodatenzentrum.de/wms_webatlasde.light_grau?', layers='webatlasde.light_grau', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
+    
     m = folium.Map(
         location=[48.0, 5.0],
         zoom_start=2,
@@ -53,10 +55,6 @@ def hello_world():
         fill_color="#3186cc",
     ).add_to(m)
 
-    map.add_tile_layer(tile_name='hfradar 1km',
-                   tile_url='http://hfradar.ndbc.noaa.gov/tilesavg.php?s=10&e=100&x={x}&y={y}&z={z}&t=2014-8-18 14:00:00&rez=1')
-                   
-    folium.LayerControl().add_to(map)
 
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
