@@ -55,10 +55,8 @@ def mapa():
                         transparent = True,
                         name = "Regiones",
                         control = True,
-                        attr = "Mapa de Chile",
+                        attr = "Mapa de Chile"
                         )
-
-    w.getLayer("chile:Regiones").addTo(map);                    
 
     w.add_to(m)
 
