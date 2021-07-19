@@ -48,14 +48,15 @@ def mapa():
         control_scale=True
         # tiles = "openstreetmap"
         )
-
-    w = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
+    attribute = ('&copy GeoBasis-DE /<a href="http://www.bkg.bund.de">BKG</a>')
+    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
                         layers = 'chile:Regiones',
                         fmt ='image/png',
                         transparent = True,
                         name = "Regiones",
                         control = True,
-                        attr = "Mapa de Chile"
+                        attr = "Mapa de Chile",
+                        attr=attribute
                         )
 
     w.getLayer("chile:Regiones").addTo(map);                    
