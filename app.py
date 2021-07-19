@@ -49,7 +49,7 @@ def mapa():
         # tiles = "openstreetmap"
         )
 
-    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
+    w = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms',
                         layers = 'chile:Regiones',
                         fmt ='image/png',
                         transparent = True,
