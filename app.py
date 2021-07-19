@@ -58,6 +58,8 @@ def mapa():
                         attr = "Mapa de Chile"
                         )
 
+    w.getLayer("chile:Regiones").addTo(map);                    
+
     w.add_to(m)
 
     hm = plugins.HeatMapWithTime(data, index=time_index, name="Puntos", auto_play=True, max_opacity=0.3, position='bottomright')
