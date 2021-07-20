@@ -30,10 +30,7 @@ def mapa():
                         transparent = True,
                         name = "Regiones",
                         control = True,
-                        attr = "Mapa de Chile",
-                        overlay=True,
-                        control=True,
-                        show=True
+                        attr = "Mapa de Chile"
                         )
 
     w.add_to(m)
