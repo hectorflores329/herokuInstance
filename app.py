@@ -3,7 +3,7 @@ import folium
 import folium.plugins as plugins
 import numpy as np
 import pandas as pd
-# from flask import request
+from flask import request
 from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
@@ -12,12 +12,11 @@ from folium.plugins import MiniMap
 app = Flask(__name__)
 
 @app.route('/')
-def mapa(codigo = '15'):
+# def mapa(codigo = '15'):
+def mapa():
 
+    codigo = request.args.get("codigo")
     codigo = str(codigo)
-    
-    # codigo = request.args.get("codigo")
-    
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
