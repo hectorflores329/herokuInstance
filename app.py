@@ -21,6 +21,9 @@ def mapa():
     comuna = request.args.get("comuna")
     comuna = str(comuna)
 
+    cuenca = request.args.get("cuenca")
+    cuenca = str(cuenca)
+
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
     m = folium.Map(
@@ -32,7 +35,8 @@ def mapa():
         # tiles = "openstreetmap"
         )
 
-    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares_r14/wms?',
+    codCuenca = "CQL_FILTER=COD_CUENCA=" + cuenca
+    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares_r14/wms?' + codCuenca,
                         layers = 'glaciares_r14:2021q1',
                         fmt ='image/png',
                         transparent = True,
