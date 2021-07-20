@@ -47,7 +47,7 @@ def mapa():
     
     w1.add_to(m)
 
-    w2 = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?',
+    w2 = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wfs?',
                         layers = 'chile:Regiones',
                         fmt ='image/png',
                         transparent = True,
