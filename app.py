@@ -45,7 +45,7 @@ def mapa():
                         )
     w.add_to(m)
 
-    filtroCom = "CQL_FILTER=COMUNA=" + comuna
+    filtroCom = "CQL_FILTER=COMUNA=14108" # + comuna
     urlCom = "https://ide.dataintelligence-group.com/geoserver/chile/wms?"
 
     w1 = folium.WmsTileLayer(urlCom + filtroCom,
