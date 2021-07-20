@@ -15,6 +15,11 @@ app = Flask(__name__)
 # def mapa(codigo = '15'):
 def mapa():
 
+    url = (
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+    )
+    antarctic_ice_edge = f"{url}/_ICVU_2019.json"
+
     codigo = request.args.get("codigo")
     codigo = str(codigo)
 
@@ -69,7 +74,8 @@ def mapa():
                         )
     w2.add_to(m)
 
-
+    folium.GeoJson(antarctic_ice_edge, name="geojson").add_to(m)
+    
     folium.TileLayer('openstreetmap').add_to(m)
     folium.TileLayer('cartodbpositron').add_to(m)
     folium.TileLayer('cartodbdark_matter').add_to(m)
