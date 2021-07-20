@@ -12,9 +12,10 @@ from folium.plugins import MiniMap
 app = Flask(__name__)
 
 @app.route('/')
-def mapa():
-    codigo = '15'
+def mapa(codigo = '15'):
 
+    codigo = str(codigo)
+    
     # codigo = request.args.get("codigo")
     
 
