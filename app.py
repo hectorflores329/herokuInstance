@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def mapa():
-    codigo = 15
+    codigo = '15'
 
     # codigo = request.args.get("codigo")
     
