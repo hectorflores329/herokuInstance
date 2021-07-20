@@ -12,8 +12,8 @@ from folium.plugins import MiniMap
 app = Flask(__name__)
 
 @app.route('/')
-def mapa():
-    # codigo = 15
+def mapa(codigo = 15):
+    #codigo = 15
 
     # codRegion = request.args.get("codigo")
     
@@ -51,7 +51,7 @@ def mapa():
     
     w1.add_to(m)
 
-    filtro = "CQL_FILTER=REGION=14"
+    filtro = "CQL_FILTER=REGION=" + codigo
     url = "https://ide.dataintelligence-group.com/geoserver/chile/wms?"
 
     w2 = folium.WmsTileLayer(url = url + filtro,
