@@ -41,7 +41,7 @@ def mapa():
                         name = "Glaciares 2",
                         control = True,
                         attr = "Mapa de Chile",
-                        cql_filter = "COMUNA = 14203"
+                        CQL_FILTER = 'COMUNA = 14203'
                         )
 
     
@@ -54,7 +54,7 @@ def mapa():
                         name = "Regiones",
                         control = True,
                         attr = "Mapa de Chile",
-                        cql_filter = "REGION = 14"
+                        CQL_FILTER = 'REGION = 14'
                         )
     w2.add_to(m)
 
