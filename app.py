@@ -28,12 +28,24 @@ def mapa():
                         layers = 'glaciares_r14:2021q1',
                         fmt ='image/png',
                         transparent = True,
-                        name = "Regiones",
+                        name = "Glaciares",
                         control = True,
                         attr = "Mapa de Chile"
                         )
-
     w.add_to(m)
+
+    w1 = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares/wms?',
+                        layers = 'glaciares:R14_BaseZonGlaciares_2017_2021q1',
+                        fmt ='image/png',
+                        transparent = True,
+                        name = "Glaciares 2",
+                        control = True,
+                        attr = "Mapa de Chile",
+                        cql_filter = "COMUNA = 14203"
+                        )
+
+    
+    w1.add_to(m)
 
 
     folium.TileLayer('openstreetmap').add_to(m)
