@@ -12,7 +12,8 @@ from folium.plugins import MiniMap
 app = Flask(__name__)
 
 @app.route('/')
-def mapa(codigo=15):
+def mapa():
+    codigo = 15
 
     # codRegion = request.args.get("codigo")
     
