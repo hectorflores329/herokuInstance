@@ -54,7 +54,7 @@ def mapa():
                         name = "Regiones",
                         control = True,
                         attr = "Mapa de Chile",
-                        cql_filter = "REGION IN ('14','10')"
+                        cql_filter = "REGION = '14')"
                         )
     w2.add_to(m)
 
