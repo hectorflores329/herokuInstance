@@ -16,7 +16,12 @@ app = Flask(__name__)
 def mapa():
 
     codigo = request.args.get("codigo")
+    region = request.args.get("region")
+    comuna = request.args.get("comuna")
+
     codigo = str(codigo)
+    region = str(region)
+    comuna = str(comuna)
 
     # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
 
@@ -29,6 +34,7 @@ def mapa():
         # tiles = "openstreetmap"
         )
 
+
     w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares_r14/wms?',
                         layers = 'glaciares_r14:2021q1',
                         fmt ='image/png',
@@ -39,11 +45,14 @@ def mapa():
                         )
     w.add_to(m)
 
-    w1 = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares/wms?',
+    filtroCom = "CQL_FILTER=COMUNA=" + comuna
+    urlCom = "https://ide.dataintelligence-group.com/geoserver/chile/wms?"
+
+    w1 = folium.WmsTileLayer(urlCom + filtroCom,
                         layers = 'glaciares:R14_BaseZonGlaciares_2017_2021q1',
                         fmt ='image/png',
                         transparent = True,
-                        name = "Glaciares 2",
+                        name = "Glaciares base zona",
                         control = True,
                         attr = "Mapa de Chile"
                         )
