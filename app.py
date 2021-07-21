@@ -101,9 +101,14 @@ def tabla():
 
     geo_json_data = json.loads(requests.get(us_states).text)
 
+    US_Unemployment_Oct2012 = f"{url}/_ICVU_2019.csv"
+    unemployment = pd.read_csv(US_Unemployment_Oct2012)
+
     m = folium.Map([43, -100], zoom_start=4)
 
-    folium.GeoJson(geo_json_data).add_to(m)
+    folium.GeoJson(
+        geo_json_data
+    ).add_to(m)
 
     return m._repr_html_()
 
