@@ -99,8 +99,8 @@ def tabla():
     data = response.json()
 
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-
-    return states.to_html(header="true", table_id="table")
+    df = states[states["CUT_COM"]=="10101"]
+    return df.to_html(header="true", table_id="table")
 
 if __name__ == '__main__':
     app.run()
