@@ -11,6 +11,7 @@ from folium.plugins import MiniMap
 import random
 import requests
 import geopandas
+import json
 
 app = Flask(__name__)
 
@@ -94,54 +95,11 @@ def mapa():
 def tabla():
 
     url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+        "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
     )
-    state_geo = f"{url}/_ICVU_2019.json"
+    us_states = f"{url}/us-states.json"
 
-    response = requests.get(
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
-    )
-    data = response.json()
-    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-
-    del states["geometry"]
-    del states["CUT_REG"]
-    del states["CUT_PROV"]
-    del states["REGION"]
-    del states["PROVINCIA"]
-    del states["Codcom"]
-    del states["INFO"]
-    del states["AÑO"]
-    del states["labor"]
-    del states["negocios"]
-    del states["sociocult"]
-    del states["conect"]
-    del states["saludma"]
-    del states["vivienda"]
-    del states["ICVU"]
-    del states["ranking"]
-
-    df = states[states["CUT_COM"]=="10101"]
-    # 10101
-
-    m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
-
-    choropleth = folium.Choropleth(
-        geo_data=state_geo,
-        name="choropleth",
-        data=df,
-        columns=["CUT_COM", "COMUNA"],
-        key_on="feature.properties.COMUNA",
-        fill_color="YlGn",
-        fill_opacity=0.7,
-        line_opacity=0.2,
-        legend_name="Unemployment Rate (%)",
-    ).add_to(m)
-
-    folium.LayerControl().add_to(m)
-
-    # return df.to_html(header="true", table_id="table")
-    return m._repr_html_()
+    geo_json_data = json.loads(requests.get(us_states).text)
 
 if __name__ == '__main__':
     app.run()
