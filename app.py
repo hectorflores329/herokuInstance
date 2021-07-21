@@ -112,7 +112,8 @@ def tabla():
 
     folium.GeoJson(mediambiente, 
                     name="Medioambiente",
-                    tooltip=folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"])
+                    tooltip=folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"],
+                    legend_name = "Medioambiente")
     ).add_to(m)
 
     return m._repr_html_()
