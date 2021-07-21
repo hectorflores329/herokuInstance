@@ -101,7 +101,6 @@ def tabla():
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-            tiles="Mapbox Bright",
             zoom_start=3
         )
 
