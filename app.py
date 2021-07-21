@@ -100,7 +100,11 @@ def tabla():
 
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
     df = states[states["CUT_COM"]=="10101"]
-    return df.to_html(header="true", table_id="table")
+
+    m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
+
+    #return df.to_html(header="true", table_id="table")
+    return m._repr_html_()
 
 if __name__ == '__main__':
     app.run()
