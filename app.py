@@ -112,13 +112,13 @@ def tabla():
 
     def getcolor(feature):
         if feature['properties']['averdexhab'] >= 1.0 and feature['properties']['averdexhab'] <= 5.0:
-            return 'red'
+            return '#a7f77d'
         if feature['properties']['averdexhab'] >= 6.0 and feature['properties']['averdexhab'] <= 10.0:
-            return 'orange'
+            return '#71c445'
         if feature['properties']['averdexhab'] >= 11.0 and feature['properties']['averdexhab'] <= 100.0:
-            return 'lime'
+            return '#52d50c'
         else:
-            return 'gray'
+            return 'transparent'
 
     folium.GeoJson(mediambiente, 
                     name="Medioambiente",
