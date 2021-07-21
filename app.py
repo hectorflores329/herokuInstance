@@ -9,6 +9,8 @@ from folium.plugins import FloatImage
 from folium.plugins import Draw
 from folium.plugins import MiniMap
 import random
+import requests
+import geopandas
 
 app = Flask(__name__)
 
@@ -88,20 +90,18 @@ def mapa():
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
-@app.route('/mapa')
+@app.route('/tabla')
 def tabla():
 
-    mapa = folium.Map(
-        location = [50, 15], 
-        zoom_start = 4
+    url = (
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
+    antarctic_ice_edge = f"{url}/_ICVU_2019.json"
 
-    mapa.choropleth(
-        geo_data = 'https://github.com/simonepri/geo-maps/releases/download/v0.6.0/countries-land-10km.geo.json',
-        columns = ['A3', 'value'],
-        key_on = 'feature.properties.A3',
-        fill_color = 'YlOrRd'
-    ).add_to(mapa)
-    
+    data = antarctic_ice_edge.json()
+    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+
+    return states.to_html(header="true", table_id="table")
+
 if __name__ == '__main__':
     app.run()
