@@ -16,7 +16,7 @@ import json
 import requests
 import geopandas as gpd
 from shapely.geometry import shape
-import colormap
+import branca.colormap as cm
 
 app = Flask(__name__)
 
@@ -132,8 +132,9 @@ def tabla():
                     )
     ).add_to(m)
 
-    colormap.caption = 'Medioambiente'
-    colormap.add_to(m)
+    colormap = cm.linear.Set1.scale(0, 35).to_step(10)
+    colormap.caption = 'A colormap caption'
+    m.add_child(colormap)
 
     return m._repr_html_()
 
