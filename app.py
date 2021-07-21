@@ -98,27 +98,21 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    r = requests.get("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json")
-    r.raise_for_status()
-
-    data = r.json()
-    for d in data:
-        d['geometry'] = shape(d['geometry'])
-
-    gdf = gpd.GeoDataFrame(data).set_geometry('geometry')
+    url = (
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+    )
+    mediambiente = f"{url}/Medioambiente.json"
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-            zoom_start=3
+        zoom_start=3,
+        control_scale=True
+        # tiles = "openstreetmap"
     )
 
-    folium.Choropleth(
-        geo_data="https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json", # map data
-        # data=df, # dataframe
-        # columns=['COMUNA','ranking'], # used columns
-        # fill_color='YlGn',
-        # key_on='feature.properties.COMUNA',#geojson country code
-        # legend_name='Estimated Population'
+    folium.GeoJson(mediambiente, 
+                    name="Medioambiente",
+                    tooltip=folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"])
     ).add_to(m)
 
     return m._repr_html_()
