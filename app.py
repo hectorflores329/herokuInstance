@@ -97,8 +97,8 @@ def tabla():
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
     state_geo = f"{url}/_ICVU_2019.json"
-    # state_unemployment = f"{url}/US_Unemployment_Oct2012.csv"
-    state_data = pd.read_csv(state_geo)
+    state_unemployment = f"{url}/_ICVU_2019.csv"
+    state_data = pd.read_csv(state_unemployment)
 
     m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
 
