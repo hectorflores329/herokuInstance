@@ -76,7 +76,7 @@ def mapa():
 
     folium.GeoJson(antarctic_ice_edge, 
                     name="Comunas GEO",
-                    tooltip=folium.Tooltip(fields=['COMUNA',],labels=False, toLocaleString=True)
+                    tooltip=folium.GeoJsonTooltip(fields=["COMUNA", "ICVU"])
                     ).add_to(m)
     
     folium.TileLayer('openstreetmap').add_to(m)
