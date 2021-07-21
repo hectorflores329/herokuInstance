@@ -104,6 +104,8 @@ def tabla():
     data = response.json()
 
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+
+    del states["geometry"]
     df = states[states["CUT_COM"]=="10101"]
 
     # state_unemployment = f"{url}/_ICVU_2019.csv"
