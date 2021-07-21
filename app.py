@@ -90,11 +90,7 @@ def mapa():
 
 @app.route('/mapa')
 def tabla():
-    map_data = pd.DataFrame({
-    'A3':['POL', 'CZE', 'SVK', 'HUN', 'AUT'],
-    'value':random.sample(range(10), 5)
-    })
-
+    
     m = folium.Map(
         location = [50, 15], 
         zoom_start = 4
@@ -102,7 +98,7 @@ def tabla():
 
     m.choropleth(
         geo_data = 'https://github.com/simonepri/geo-maps/releases/download/v0.6.0/countries-land-10km.geo.json',
-        data = map_data,
+        data = 'POL',
         columns = ['A3', 'value'],
         key_on = 'feature.properties.A3',
         fill_color = 'YlOrRd'
