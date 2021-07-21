@@ -99,11 +99,11 @@ def tabla():
     state_geo = f"{url2}/_ICVU_2019.json"
 
     response = requests.get(
-        "https://ide.dataintelligence-group.com/geoserver/glaciares/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=glaciares%3AR14_Subcuencas_Glaciares&maxFeatures=50&outputFormat=application%2Fjson"
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
     )
     data = response.json()
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-    
+
     df = states[states["CUT_COM"]=="10101"]
     # 10101
 
