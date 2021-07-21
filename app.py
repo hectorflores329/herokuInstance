@@ -96,7 +96,7 @@ def mapa():
 def tabla():
 
 
-    df = pd.read_csv("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.csv", sep = ',',)
 
 
     m = folium.Map(
