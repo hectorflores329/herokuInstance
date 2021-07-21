@@ -137,6 +137,8 @@ def tabla():
         folium.CircleMarker((lat/10, lng/10), color='red', radius=2).add_to(group0)
     group0.add_to(m)
 
+    folium.map.LayerControl('topright', collapsed=False).add_to(m)
+    
     return m._repr_html_()
 
 if __name__ == '__main__':
