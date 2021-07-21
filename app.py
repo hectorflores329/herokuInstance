@@ -96,9 +96,7 @@ def mapa():
 def tabla():
 
 
-    gj = "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
-
-    states = geopandas.GeoDataFrame.from_features(gj, crs="EPSG:4326")
+    df = pd.read_csv("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.csv")
 
     mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
                     tiles="Mapbox Bright",
