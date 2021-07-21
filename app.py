@@ -93,12 +93,11 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+    response = requests.get(
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
     )
-    antarctic_ice_edge = f"{url}/_ICVU_2019.json"
+    data = response.json()
 
-    data = antarctic_ice_edge.json()
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
 
     return states.to_html(header="true", table_id="table")
