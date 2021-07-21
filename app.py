@@ -12,6 +12,7 @@ import random
 import requests
 import geopandas
 import json
+from branca.colormap import linear
 
 app = Flask(__name__)
 
@@ -104,7 +105,13 @@ def tabla():
     US_Unemployment_Oct2012 = f"{url}/_ICVU_2019.csv"
     unemployment = pd.read_csv(US_Unemployment_Oct2012)
 
-    m = folium.Map([43, -100], zoom_start=4)
+    colormap = linear.YlGn_09.scale(
+        unemployment.Unemployment.min(), unemployment.Unemployment.max()
+    )
+
+    print(colormap(5.0))
+
+    m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=4)
 
     folium.GeoJson(
         geo_json_data
