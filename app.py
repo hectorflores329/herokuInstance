@@ -107,7 +107,7 @@ def tabla():
     folium.Choropleth(
         geo_data="https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json", # map data
         data=df, # dataframe
-        # columns=['CUT_COM','COMUNA'], # used columns
+        columns=['CUT_COM','COMUNA'], # used columns
         # fill_color='YlGn',
         # key_on='feature.properties.COMUNA',#geojson country code
         legend_name='Estimated Population'
