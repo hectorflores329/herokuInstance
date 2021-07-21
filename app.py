@@ -106,8 +106,8 @@ def tabla():
     m.choropleth(
         geo_data = 'https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json',
         data = df,
-        columns = ['A3', 'value'],
-        key_on = 'feature.properties.A3',
+        columns = ['CUT_COM', 'COMUNA'],
+        key_on = 'feature.properties.COMUNA',
         fill_color = 'YlOrRd'
     )
 
