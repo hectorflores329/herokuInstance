@@ -125,8 +125,10 @@ def tabla():
                     style_function = lambda feature: {
                     'fillColor': getcolor(feature),
                     'weight': 0,
-                    'fillOpacity': 0.8,}
-
+                    'fillOpacity': 0.8,},
+                    tooltip = folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"],
+                    aliases = ['Región', 'Comuna', 'Área verde', 'Área verde por habitante'],
+                    )
     ).add_to(m)
 
     return m._repr_html_()
