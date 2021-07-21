@@ -13,6 +13,9 @@ import random
 import requests
 import geopandas
 import json
+import requests
+import geopandas as gpd
+from shapely.geometry import shape
 
 app = Flask(__name__)
 
@@ -95,10 +98,6 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-
-    df = geopandas.GeoDataFrame.from_features("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json", crs="EPSG:4326")
-
-
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
             zoom_start=3
@@ -106,11 +105,11 @@ def tabla():
 
     folium.Choropleth(
         geo_data="https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json", # map data
-        data=df, # dataframe
-        columns=['COMUNA','ranking'], # used columns
+        # data=df, # dataframe
+        # columns=['COMUNA','ranking'], # used columns
         # fill_color='YlGn',
         # key_on='feature.properties.COMUNA',#geojson country code
-        legend_name='Estimated Population'
+        # legend_name='Estimated Population'
     ).add_to(m)
 
     return m._repr_html_()
