@@ -95,9 +95,9 @@ def mapa():
 def tabla():
 
     url = (
-        "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
-    us_states = f"{url}/us-states.json"
+    us_states = f"{url}/_ICVU_2019.json"
 
     geo_json_data = json.loads(requests.get(us_states).text)
 
