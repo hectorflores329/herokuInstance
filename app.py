@@ -103,9 +103,9 @@ def tabla():
 
     data = r.json()
     for d in data:
-        d['geometry'] = shape(d['geometry'])
+        d['the_geom'] = shape(d['the_geom'])
 
-    gdf = gpd.GeoDataFrame(data).set_geometry('geometry')
+    gdf = gpd.GeoDataFrame(data).set_geometry('the_geom')
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
