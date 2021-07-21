@@ -100,6 +100,23 @@ def tabla():
     data = response.json()
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
 
+    del states["geometry"]
+    del states["CUT_REG"]
+    del states["CUT_PROV"]
+    del states["REGION"]
+    del states["PROVINCIA"]
+    del states["Codcom"]
+    del states["INFO"]
+    del states["AÑO"]
+    del states["labor"]
+    del states["negocios"]
+    del states["sociocult"]
+    del states["conect"]
+    del states["saludma"]
+    del states["vivienda"]
+    del states["ICVU"]
+    del states["ranking"]
+
     df = states[states["CUT_COM"]=="10101"]
     # 10101
 
