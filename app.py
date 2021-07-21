@@ -98,18 +98,11 @@ def tabla():
     )
     state_geo = f"{url}/_ICVU_2019.json"
 
-    response = requests.get(
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
-    )
-    data = response.json()
+    state_unemployment = f"{url}/_ICVU_2019.csv"
+    state_data = pd.read_csv(state_unemployment)
 
-    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-
-    del states["geometry"]
-    df = states[states["CUT_COM"]=="10101"]
-
-    # state_unemployment = f"{url}/_ICVU_2019.csv"
-    # state_data = pd.read_csv(state_unemployment)
+    # del state_data["geometry"]
+    df = state_data[state_data["CUT_COM"]=="10101"]
 
     # df = state_data[state_data["CUT_COM"]=="10101"]
     # 10101
