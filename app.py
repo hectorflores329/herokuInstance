@@ -93,6 +93,10 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
+    url2 = (
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+    )
+    state_geo = f"{url2}/_ICVU_2019.json"
 
     response = requests.get(
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
@@ -120,8 +124,24 @@ def tabla():
     df = states[states["CUT_COM"]=="10101"]
     # 10101
 
-    return df.to_html(header="true", table_id="table")
+    m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
 
+    choropleth = folium.Choropleth(
+        geo_data=state_geo,
+        name="choropleth",
+        data=df,
+        columns=["CUT_COM", "COMUNA"],
+        key_on="feature.properties.COMUNA",
+        fill_color="YlGn",
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name="Unemployment Rate (%)",
+    ).add_to(m)
+
+    folium.LayerControl().add_to(m)
+
+    # return df.to_html(header="true", table_id="table")
+    return m._repr_html_()
 
 if __name__ == '__main__':
     app.run()
