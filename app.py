@@ -110,10 +110,23 @@ def tabla():
         # tiles = "openstreetmap"
     )
 
+    def getcolor(feature):
+        if feature['properties']['averdexhab'] >= 1.0 and feature['properties']['averdexhab'] <= 5.0:
+            return 'red'
+        if feature['properties']['averdexhab'] >= 6.0 and feature['properties']['averdexhab'] <= 10.0:
+            return 'orange'
+        if feature['properties']['averdexhab'] >= 11.0 and feature['properties']['averdexhab'] <= 100.0:
+            return 'lime'
+        else:
+            return 'gray'
+
     folium.GeoJson(mediambiente, 
                     name="Medioambiente",
-                    tooltip=folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"],
-                    legend_name = "Medioambiente")
+                    style_function = lambda feature: {
+                    'fillColor': getcolor(feature),
+                    'weight': 0,
+                    'fillOpacity': 0.8,}
+
     ).add_to(m)
 
     return m._repr_html_()
