@@ -17,6 +17,7 @@ import requests
 import geopandas as gpd
 from shapely.geometry import shape
 import branca.colormap as cm
+from branca.element import Template, MacroElement
 
 app = Flask(__name__)
 
@@ -132,13 +133,6 @@ def tabla():
                     )
     ).add_to(m)
 
-    group0 = folium.FeatureGroup(name='<span style=\\"color: red;\\">red circles</span>')
-    for lat, lng in zip(range(500, 520), range(50,70)):
-        folium.CircleMarker((lat/10, lng/10), color='red', radius=2).add_to(group0)
-    group0.add_to(m)
-
-    folium.map.LayerControl('topright', collapsed=False).add_to(m)
-    
     return m._repr_html_()
 
 if __name__ == '__main__':
