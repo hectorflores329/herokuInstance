@@ -104,7 +104,7 @@ def tabla():
     m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
 
     choropleth = folium.Choropleth(
-        geo_data=data,
+        geo_data="https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json",
         name='choropleth',
         data=df,
         columns=['CUT_COM', 'COMUNA'],
