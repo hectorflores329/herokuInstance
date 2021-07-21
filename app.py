@@ -102,7 +102,7 @@ def tabla():
     data = response.json()
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
 
-    df = states["geometry"]
+    del states["geometry"]
 
     mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
                     tiles="Mapbox Bright",
