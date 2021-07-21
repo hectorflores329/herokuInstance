@@ -103,6 +103,21 @@ def tabla():
 
     m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
 
+    choropleth = folium.Choropleth(
+        geo_data=data,
+        name='choropleth',
+        data=df,
+        columns=['CUT_COM', 'COMUNA'],
+        key_on='feature.properties.COMUNA',
+        fill_color='YlGn',
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name='Arecanut Arrival(in Quintal)',
+        highlight=True,
+        line_color='black'
+    ).add_to(m)
+
+
     #return df.to_html(header="true", table_id="table")
     return m._repr_html_()
 
