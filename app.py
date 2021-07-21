@@ -169,7 +169,7 @@ def tabla():
         style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
         border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
         
-    <div class='legend-title'>Medioambiente - Áreas verdes por habitantes</div>
+    <div class='legend-title'>Área verde por habitante</div>
     <div class='legend-scale'>
     <ul class='legend-labels'>
         <li><span style='background:#a7f77d;opacity:0.7;'></span>1 - 5</li>
