@@ -97,18 +97,27 @@ def tabla():
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
     state_geo = f"{url}/_ICVU_2019.json"
-    state_unemployment = f"{url}/_ICVU_2019.csv"
-    state_data = pd.read_csv(state_unemployment)
 
-    df = state_data[state_data["CUT_COM"]=="10101"]
+    response = requests.get(
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
+    )
+    data = response.json()
+
+    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+    # df = states[states["CUT_COM"]=="10101"]
+
+    # state_unemployment = f"{url}/_ICVU_2019.csv"
+    # state_data = pd.read_csv(state_unemployment)
+
+    # df = state_data[state_data["CUT_COM"]=="10101"]
     # 10101
 
-    '''m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
+    m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
 
     folium.Choropleth(
         geo_data=state_geo,
         name="choropleth",
-        data=df,
+        data=states,
         columns=["CUT_COM", "COMUNA"],
         # key_on="feature.id",
         fill_color="YlGn",
@@ -117,10 +126,10 @@ def tabla():
         legend_name="Unemployment Rate (%)",
     ).add_to(m)
 
-    folium.LayerControl().add_to(m)'''
+    folium.LayerControl().add_to(m)
 
-    return state_data.to_html(header="true", table_id="table")
-    # return m._repr_html_()
+    # return state_data.to_html(header="true", table_id="table")
+    return m._repr_html_()
 
 if __name__ == '__main__':
     app.run()
