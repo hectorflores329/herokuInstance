@@ -113,11 +113,11 @@ def tabla():
     )
 
     def getcolor(feature):
-        if feature['properties']['averdexhab'] >= 1.0 and feature['properties']['averdexhab'] <= 5.0:
+        if feature['properties']['glac_21_Q1'] >= 1.0 and feature['properties']['glac_21_Q1'] <= 5.0:
             return '#a7f77d'
-        if feature['properties']['averdexhab'] >= 6.0 and feature['properties']['averdexhab'] <= 10.0:
+        if feature['properties']['glac_21_Q1'] >= 6.0 and feature['properties']['glac_21_Q1'] <= 10.0:
             return '#71c445'
-        if feature['properties']['averdexhab'] >= 11.0 and feature['properties']['averdexhab'] <= 100.0:
+        if feature['properties']['glac_21_Q1'] >= 11.0 and feature['properties']['glac_21_Q1'] <= 100.0:
             return '#52d50c'
         else:
             return 'transparent'
@@ -128,8 +128,8 @@ def tabla():
                     'fillColor': getcolor(feature),
                     'weight': 0,
                     'fillOpacity': 0.8,},
-                    tooltip = folium.GeoJsonTooltip(fields=["REGION", "COMUNA", "areaverde", "averdexhab"],
-                    aliases = ['Región', 'Comuna', 'Área verde', 'Área verde por habitante'],
+                    tooltip = folium.GeoJsonTooltip(fields=["NOM_REGION", "NOM_COMUNA", "glac_21_Q1"],
+                    aliases = ['Región', 'Comuna', 'Glaciar'],
                     )
     ).add_to(m)
 
