@@ -98,14 +98,14 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    r = requests.get("https://data.cityofnewyork.us/resource/5rqd-h5ci.json")
+    r = requests.get("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json")
     r.raise_for_status()
 
     data = r.json()
     for d in data:
-        d['the_geom'] = shape(d['the_geom'])
+        d['geometry'] = shape(d['geometry'])
 
-    gdf = gpd.GeoDataFrame(data).set_geometry('the_geom')
+    gdf = gpd.GeoDataFrame(data).set_geometry('geometry')
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
