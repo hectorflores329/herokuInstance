@@ -95,12 +95,10 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    response = requests.get(
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
-    )
 
-    data = response.json()
-    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+    gj = "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
+
+    states = geopandas.GeoDataFrame.from_features(gj, crs="EPSG:4326")
 
     mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
                     tiles="Mapbox Bright",
