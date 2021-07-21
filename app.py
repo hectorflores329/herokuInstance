@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
 from folium.plugins import MiniMap
+import random
 
 app = Flask(__name__)
 
@@ -87,5 +88,24 @@ def mapa():
     return m._repr_html_()
     # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
 
+@app.route('/mapa')
+def tabla():
+    map_data = pd.DataFrame({
+    'A3':['POL', 'CZE', 'SVK', 'HUN', 'AUT'],
+    'value':random.sample(range(10), 5)
+    })
+
+    m = folium.Map(
+        location = [50, 15], 
+        zoom_start = 4
+    )
+
+    m.choropleth(
+        geo_data = 'https://github.com/simonepri/geo-maps/releases/download/v0.6.0/countries-land-10km.geo.json',
+        data = map_data,
+        columns = ['A3', 'value'],
+        key_on = 'feature.properties.A3',
+        fill_color = 'YlOrRd'
+    )
 if __name__ == '__main__':
     app.run()
