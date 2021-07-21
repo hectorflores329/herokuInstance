@@ -105,7 +105,7 @@ def tabla():
 
     m = folium.Map(
         location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=3,
+        zoom_start=5,
         control_scale=True
         # tiles = "openstreetmap"
     )
@@ -122,6 +122,7 @@ def tabla():
 
     folium.GeoJson(mediambiente, 
                     name="Medioambiente",
+                    bins=[5, 10, 100],
                     style_function = lambda feature: {
                     'fillColor': getcolor(feature),
                     'weight': 0,
