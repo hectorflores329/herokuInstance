@@ -93,10 +93,10 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    url2 = (
+    url = (
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
-    state_geo = f"{url2}/_ICVU_2019.json"
+    state_geo = f"{url}/_ICVU_2019.json"
 
     response = requests.get(
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
