@@ -94,23 +94,13 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
-    )
-    us_states = f"{url}/_ICVU_2019.json"
+    geo_str = json.dumps(json.load(open("_ICVU_2019.json", 'r')))
 
-    geo_json_data = json.loads(requests.get(us_states).text)
+    mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
+                    tiles="Mapbox Bright",
+                    zoom_start=3)
 
-    US_Unemployment_Oct2012 = f"{url}/_ICVU_2019.csv"
-    unemployment = pd.read_csv(US_Unemployment_Oct2012)
-
-    m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=4)
-
-    folium.GeoJson(
-        geo_json_data
-    ).add_to(m)
-
-    return m._repr_html_()
+    return mapeu._repr_html_()
 
 if __name__ == '__main__':
     app.run()
