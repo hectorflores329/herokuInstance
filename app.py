@@ -141,7 +141,7 @@ def tabla():
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Draggable - Default functionality</title>
+    <title>Dataintelligence</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -169,12 +169,12 @@ def tabla():
         style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
         border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
         
-    <div class='legend-title'>Legend (draggable!)</div>
+    <div class='legend-title'>Medioambiente - Áreas verdes por habitantes</div>
     <div class='legend-scale'>
     <ul class='legend-labels'>
-        <li><span style='background:red;opacity:0.7;'></span>Big</li>
-        <li><span style='background:orange;opacity:0.7;'></span>Medium</li>
-        <li><span style='background:green;opacity:0.7;'></span>Small</li>
+        <li><span style='background:#a7f77d;opacity:0.7;'></span>1 - 5</li>
+        <li><span style='background:#71c445;opacity:0.7;'></span>6 - 10</li>
+        <li><span style='background:#52d50c;opacity:0.7;'></span>11 - 100</li>
 
     </ul>
     </div>
