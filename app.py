@@ -101,9 +101,9 @@ def tabla():
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
     df = states[states["CUT_COM"]=="10101"]
 
-    m = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
+    mapa = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
 
-    m.choropleth(
+    choro = folium.choropleth(
         geo_data = 'https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json',
         data = df,
         columns = ['CUT_COM', 'COMUNA'],
@@ -111,9 +111,10 @@ def tabla():
         fill_color = 'YlOrRd'
     )
 
+    choro.add_to(mapa)
 
     #return df.to_html(header="true", table_id="table")
-    return m._repr_html_()
+    return mapa._repr_html_()
 
 if __name__ == '__main__':
     app.run()
