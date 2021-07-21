@@ -104,7 +104,7 @@ def tabla():
     data = response.json()
 
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-    # df = states[states["CUT_COM"]=="10101"]
+    df = states[states["CUT_COM"]=="10101"]
 
     # state_unemployment = f"{url}/_ICVU_2019.csv"
     # state_data = pd.read_csv(state_unemployment)
@@ -117,7 +117,7 @@ def tabla():
     folium.Choropleth(
         geo_data=state_geo,
         name="choropleth",
-        data=states,
+        data=df,
         columns=["CUT_COM", "COMUNA"],
         # key_on="feature.id",
         fill_color="YlGn",
