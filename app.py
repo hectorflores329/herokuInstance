@@ -101,15 +101,10 @@ def tabla():
 
     geo_json_data = json.loads(requests.get(us_states).text)
 
-    m = folium.Map(
-        location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=5,
-        min_zoom = 8,
-        max_zoom = 30,
-        control_scale=True
-        # tiles = "openstreetmap"
-        )
-        
+    m = folium.Map([43, -100], zoom_start=4)
+
+    folium.GeoJson(geo_json_data).add_to(m)
+
     return m._repr_html_()
 
 if __name__ == '__main__':
