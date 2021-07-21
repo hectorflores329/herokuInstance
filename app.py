@@ -94,7 +94,7 @@ def mapa():
 def tabla():
 
     url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/"
+        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
     state_geo = f"{url}/_ICVU_2019.json"
     # state_unemployment = f"{url}/US_Unemployment_Oct2012.csv"
