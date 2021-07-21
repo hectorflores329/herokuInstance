@@ -76,7 +76,6 @@ def mapa():
 
     folium.GeoJson(antarctic_ice_edge, 
                     name="Comunas GEO",
-                    filter="COMUNA=Hualqui",
                     tooltip=folium.GeoJsonTooltip(fields=["COMUNA", "ICVU"])
                     ).add_to(m)
     
