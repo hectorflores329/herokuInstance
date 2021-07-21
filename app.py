@@ -1,3 +1,4 @@
+from os import stat
 from flask import Flask
 import folium
 import folium.plugins as plugins
@@ -97,9 +98,11 @@ def tabla():
     response = requests.get(
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
     )
-    
+
     data = response.json()
     states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+
+    df = states["geometry"]
 
     mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
                     tiles="Mapbox Bright",
