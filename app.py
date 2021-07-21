@@ -132,9 +132,10 @@ def tabla():
                     )
     ).add_to(m)
 
-    colormap = cm.linear.Set1.scale(0, 35).to_step(10)
-    colormap.caption = 'A colormap caption'
-    m.add_child(colormap)
+    group0 = folium.FeatureGroup(name='<span style=\\"color: red;\\">red circles</span>')
+    for lat, lng in zip(range(500, 520), range(50,70)):
+        folium.CircleMarker((lat/10, lng/10), color='red', radius=2).add_to(group0)
+    group0.add_to(m)
 
     return m._repr_html_()
 
