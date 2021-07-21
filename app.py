@@ -101,7 +101,6 @@ def tabla():
     state_unemployment = f"{url}/_ICVU_2019.csv"
     state_data = pd.read_csv(state_unemployment)
 
-    del state_data["geometry"]
     df = state_data[state_data["CUT_COM"]=="10101"]
 
     # df = state_data[state_data["CUT_COM"]=="10101"]
@@ -109,12 +108,12 @@ def tabla():
 
     m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
 
-    folium.Choropleth(
+    choropleth = folium.Choropleth(
         geo_data=state_geo,
         name="choropleth",
         data=df,
         columns=["CUT_COM", "COMUNA"],
-        # key_on="feature.id",
+        key_on="feature.properties.COMUNA",
         fill_color="YlGn",
         fill_opacity=0.7,
         line_opacity=0.2,
