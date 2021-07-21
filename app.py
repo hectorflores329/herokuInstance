@@ -16,6 +16,7 @@ import json
 import requests
 import geopandas as gpd
 from shapely.geometry import shape
+import colormap
 
 app = Flask(__name__)
 
@@ -122,7 +123,6 @@ def tabla():
 
     folium.GeoJson(mediambiente, 
                     name="Medioambiente",
-                    bins=[5, 10, 100],
                     style_function = lambda feature: {
                     'fillColor': getcolor(feature),
                     'weight': 0,
@@ -131,6 +131,9 @@ def tabla():
                     aliases = ['Región', 'Comuna', 'Área verde', 'Área verde por habitante'],
                     )
     ).add_to(m)
+
+    colormap.caption = 'Medioambiente'
+    colormap.add_to(m)
 
     return m._repr_html_()
 
