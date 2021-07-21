@@ -93,28 +93,31 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    response = requests.get(
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json"
+    url = (
+        "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
     )
-    data = response.json()
+    state_geo = f"{url}/us-states.json"
+    state_unemployment = f"{url}/US_Unemployment_Oct2012.csv"
+    state_data = pd.read_csv(state_unemployment)
 
-    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
-    df = states[states["CUT_COM"]=="10101"]
+    m = folium.Map(location=[48, -102], zoom_start=3)
 
-    mapa = folium.Map([-33.48621795345005, -70.66557950912359], zoom_start=6)
+    folium.Choropleth(
+        geo_data=state_geo,
+        name="choropleth",
+        data=state_data,
+        columns=["State", "Unemployment"],
+        key_on="feature.id",
+        fill_color="YlGn",
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name="Unemployment Rate (%)",
+    ).add_to(m)
 
-    choro = folium.choropleth(
-        geo_data = 'https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.json',
-        data = df,
-        columns = ['CUT_COM', 'COMUNA'],
-        key_on = 'feature.properties.COMUNA',
-        fill_color = 'YlOrRd'
-    )
-
-    choro.add_to(mapa)
+    folium.LayerControl().add_to(m)
 
     #return df.to_html(header="true", table_id="table")
-    return mapa._repr_html_()
+    return m._repr_html_()
 
 if __name__ == '__main__':
     app.run()
