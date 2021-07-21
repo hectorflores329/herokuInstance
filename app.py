@@ -93,17 +93,18 @@ def mapa():
 @app.route('/tabla')
 def tabla():
 
-    url = (
+    url2 = (
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
-    state_geo = f"{url}/_ICVU_2019.json"
+    state_geo = f"{url2}/_ICVU_2019.json"
 
-    state_unemployment = f"{url}/_ICVU_2019.csv"
-    state_data = pd.read_csv(state_unemployment)
-
-    df = state_data[state_data["CUT_COM"]=="10101"]
-
-    # df = state_data[state_data["CUT_COM"]=="10101"]
+    response = requests.get(
+        "https://ide.dataintelligence-group.com/geoserver/glaciares/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=glaciares%3AR14_Subcuencas_Glaciares&maxFeatures=50&outputFormat=application%2Fjson"
+    )
+    data = response.json()
+    states = geopandas.GeoDataFrame.from_features(data, crs="EPSG:4326")
+    
+    df = states[states["CUT_COM"]=="10101"]
     # 10101
 
     m = folium.Map(location=[-33.48621795345005, -70.6655795091235], zoom_start=3)
