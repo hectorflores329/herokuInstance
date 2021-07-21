@@ -96,7 +96,7 @@ def mapa():
 def tabla():
 
 
-    df = pd.read_csv("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.csv")
+    #df = pd.read_csv("https://raw.githubusercontent.com/hectorflores329/herokugee/main/_ICVU_2019.csv")
 
     mapeu = folium.Map(location=[-33.48621795345005, -70.66557950912359], # Munich coordinates
                     tiles="Mapbox Bright",
