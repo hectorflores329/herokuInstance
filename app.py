@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 from folium.plugins import FloatImage
 from folium.plugins import Draw
 from folium.plugins import MiniMap
-from pyspark.sql import functions as F
 
 app = Flask(__name__)
 
@@ -75,9 +74,7 @@ def mapa():
                         )
     w2.add_to(m)
 
-    customJson = antarctic_ice_edge.filter(F.col('COMUNA') == "Hualqui")
-
-    folium.GeoJson(customJson, 
+    folium.GeoJson(antarctic_ice_edge, 
                     name="Comunas GEO",
                     tooltip=folium.GeoJsonTooltip(fields=["COMUNA", "ICVU"])
                     ).add_to(m)
