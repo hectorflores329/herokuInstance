@@ -231,22 +231,6 @@ def tabla():
 
     return m._repr_html_()
 
-@app.route('/gee')
-# def mapa(codigo = '15'):
-def mapa():
-
-    m = folium.Map(
-        location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=5,
-        min_zoom = 8,
-        max_zoom = 30,
-        control_scale=True
-        # tiles = "openstreetmap"
-        )
-
-    return m._repr_html_()
-    # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
-
 
 if __name__ == '__main__':
     app.run()
