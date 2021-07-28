@@ -114,16 +114,16 @@ def tabla():
 
     def getcolor(feature):
         if feature['properties']['glac_21_Q1'] >= 1.0 and feature['properties']['glac_21_Q1'] <= 5.0:
-            return '#a7f77d'
+            return '#9cd9f3'
         if feature['properties']['glac_21_Q1'] >= 6.0 and feature['properties']['glac_21_Q1'] <= 10.0:
-            return '#71c445'
+            return '#5abce6'
         if feature['properties']['glac_21_Q1'] >= 11.0 and feature['properties']['glac_21_Q1'] <= 100.0:
-            return '#52d50c'
+            return '#1f88b4'
         else:
             return 'transparent'
 
     folium.GeoJson(mediambiente, 
-                    name="Medioambiente",
+                    name="Glaciares",
                     style_function = lambda feature: {
                     'fillColor': getcolor(feature),
                     'weight': 0,
@@ -169,12 +169,12 @@ def tabla():
         style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
         border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
         
-    <div class='legend-title'>Área verde por habitante</div>
+    <div class='legend-title'>Glaciares</div>
     <div class='legend-scale'>
     <ul class='legend-labels'>
-        <li><span style='background:#a7f77d;opacity:0.7;'></span>1 - 5</li>
-        <li><span style='background:#71c445;opacity:0.7;'></span>6 - 10</li>
-        <li><span style='background:#52d50c;opacity:0.7;'></span>11 - 100</li>
+        <li><span style='background:#9cd9f3;opacity:0.7;'></span>1 - 5</li>
+        <li><span style='background:#5abce6;opacity:0.7;'></span>6 - 10</li>
+        <li><span style='background:#1f88b4;opacity:0.7;'></span>11 - 100</li>
 
     </ul>
     </div>
