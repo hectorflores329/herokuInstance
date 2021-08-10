@@ -28,7 +28,7 @@ def mapa():
     url = (
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
-    antarctic_ice_edge = f"{url}/_ICVU_2019.json"
+    antarctic_ice_edge = f"{url}/Rx_Lim_Glaciares_FINAL_ClipRegion.json"
 
     codigo = request.args.get("codigo")
     codigo = str(codigo)
