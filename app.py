@@ -86,7 +86,7 @@ def mapa():
 
     folium.GeoJson(antarctic_ice_edge, 
                     name="Comunas GEO",
-                    tooltip=folium.GeoJsonTooltip(fields=["COMUNA", "ICVU"])
+                    tooltip=folium.GeoJsonTooltip(fields=["COMUNA"])
                     ).add_to(m)
     
     folium.TileLayer('openstreetmap').add_to(m)
@@ -113,11 +113,11 @@ def tabla():
     )
 
     def getcolor(feature):
-        if feature['properties']['glac_21_Q1'] >= 1.0 and feature['properties']['glac_21_Q1'] <= 5.0:
+        if feature['properties']['q1_SN'] >= 1.0 and feature['properties']['q1_SN'] <= 5.0:
             return '#9cd9f3'
-        if feature['properties']['glac_21_Q1'] >= 6.0 and feature['properties']['glac_21_Q1'] <= 10.0:
+        if feature['properties']['q1_SN'] >= 6.0 and feature['properties']['q1_SN'] <= 10.0:
             return '#5abce6'
-        if feature['properties']['glac_21_Q1'] >= 11.0 and feature['properties']['glac_21_Q1'] <= 100.0:
+        if feature['properties']['q1_SN'] >= 100.00:
             return '#1f88b4'
         else:
             return 'transparent'
@@ -128,8 +128,8 @@ def tabla():
                     'fillColor': getcolor(feature),
                     'weight': 0,
                     'fillOpacity': 0.8,},
-                    tooltip = folium.GeoJsonTooltip(fields=["NOM_REGION", "NOM_COMUNA", "glac_21_Q1"],
-                    aliases = ['Región', 'Comuna', 'Glaciar'],
+                    tooltip = folium.GeoJsonTooltip(fields=["NOM_COMUNA"],
+                    aliases = ['Comuna'],
                     )
     ).add_to(m)
 
