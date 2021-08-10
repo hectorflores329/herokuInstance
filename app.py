@@ -28,7 +28,7 @@ def mapa():
     url = (
         "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
     )
-    antarctic_ice_edge = f"{url}/_ICVU_2019.json"
+    antarctic_ice_edge = f"{url}/Rx_AREA_Glac_ZONA_glac.json"
 
     codigo = request.args.get("codigo")
     codigo = str(codigo)
@@ -85,8 +85,8 @@ def mapa():
     w2.add_to(m)
 
     folium.GeoJson(antarctic_ice_edge, 
-                    name="Comunas GEO",
-                    tooltip=folium.GeoJsonTooltip(fields=["COMUNA", "ICVU"])
+                    name="Glaciares",
+                    tooltip=folium.GeoJsonTooltip(fields=["SUM_Shape_", "q1_SN"])
                     ).add_to(m)
     
     folium.TileLayer('openstreetmap').add_to(m)
