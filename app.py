@@ -1,236 +1,142 @@
-from os import stat
 from flask import Flask
-import folium
-import folium.plugins as plugins
-import numpy as np
+from folium.map import FeatureGroup, Popup
 import pandas as pd
+import folium
 from flask import request
-from datetime import datetime, timedelta
-from folium.plugins import FloatImage
-from folium.plugins import Draw
-from folium.plugins import MiniMap
-import random
-import requests
-import geopandas
-import json
-import requests
-import geopandas as gpd
-from shapely.geometry import shape
-import branca.colormap as cm
-from branca.element import Template, MacroElement
 
 app = Flask(__name__)
 
 @app.route('/')
-# def mapa(codigo = '15'):
-def mapa():
+def temp():
 
-    url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
+    try:
+        comuna = request.args.get("comuna")
+        comuna = int(comuna)
+    except:
+        comuna = 0
+
+    if (comuna == 0):
+        puntos = "http://ide.dataintelligence-group.com/mapasdi/temperatura/13101.csv"
+    else:
+        puntos = "http://ide.dataintelligence-group.com/mapasdi/temperatura/" + str(comuna) + ".csv"
+
+    df = pd.read_csv(puntos, nrows=1000)
+
+    df = df[df["COMUNA"] == comuna]
+
+    latitude = df["latitude"].tolist()
+    longitude = df["longitude"].tolist()
+    nomCom = df["NOM_COMUNA"].tolist()
+
+    locations = []
+
+    for lat, lon in zip(latitude, longitude):
+        fLat = float(lat)
+        fLon = float(lon)
+        locations.append((lat, lon, nomCom))
+
+    if (comuna == 0):
+        ubicacion = [-33.467890412071654, -70.66557950912359]
+    else:
+        ubicacion = [locations[0][0], locations[0][1]]
+    
+    _map = folium.Map(
+        location=ubicacion,
+        zoom_start=11,
     )
-    antarctic_ice_edge = f"{url}/R10_AREA_Glac_ZONA_glac.json"
-
-    codigo = request.args.get("codigo")
-    codigo = str(codigo)
-
-    comuna = request.args.get("comuna")
-    comuna = str(comuna)
-
-    # atlas = folium.raster_layers.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/chile/wms?', layers='chile:Regiones', name='test', fmt='image/png', attr='test', transparent=True, version='1.3.0')
-
-    m = folium.Map(
-        location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=5,
-        min_zoom = 8,
-        max_zoom = 30,
-        control_scale=True
-        # tiles = "openstreetmap"
-        )
-
-    w = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares_r14/wms?',
-                        layers = 'glaciares_r14:2021q1',
-                        fmt ='image/png',
-                        transparent = True,
-                        name = "Glaciares",
-                        control = True,
-                        attr = "Mapa de Chile"
-                        )
-    w.add_to(m)
-
-
-    codComuna = "CQL_FILTER=COMUNA=" + comuna
-    w1 = folium.WmsTileLayer(url = 'https://ide.dataintelligence-group.com/geoserver/glaciares/wms?' + codComuna,
-                        layers = 'glaciares:R14_BaseZonGlaciares_2017_2021q1',
-                        fmt ='image/png',
-                        transparent = True,
-                        name = "Glaciares 2",
-                        control = True,
-                        attr = "Mapa de Chile"
-                        )
-
     
-    w1.add_to(m)
-
-    filtro = "CQL_FILTER=REGION=" + codigo
-    url = "https://ide.dataintelligence-group.com/geoserver/chile/wms?"
-
-    w2 = folium.WmsTileLayer(url = url + filtro,
-                        layers = 'chile:Regiones',
-                        fmt ='image/png',
-                        transparent = True,
-                        name = "Regiones",
-                        control = True,
-                        attr = "Mapa de Chile"
-                        )
-    w2.add_to(m)
-
-    folium.GeoJson(antarctic_ice_edge, 
-                    name="Glaciares",
-                    tooltip=folium.GeoJsonTooltip(fields=["idZonGlac", "SUM_Shape_"])
-                    ).add_to(m)
-    
-    folium.TileLayer('openstreetmap').add_to(m)
-    folium.TileLayer('cartodbpositron').add_to(m)
-    folium.TileLayer('cartodbdark_matter').add_to(m)
-    folium.LayerControl().add_to(m)
-
-    return m._repr_html_()
-    # return HeatMapWithTime(lat_long_list2,radius=5,auto_play=True,position='bottomright').add_to(map)
-
-@app.route('/tabla')
-def tabla():
-
-    url = (
-        "https://raw.githubusercontent.com/hectorflores329/herokugee/main"
-    )
-    mediambiente = f"{url}/Medioambiente.json"
-
-    m = folium.Map(
-        location=[-33.48621795345005, -70.66557950912359],
-        zoom_start=5,
-        control_scale=True
-        # tiles = "openstreetmap"
-    )
-
-    def getcolor(feature):
-        if feature['properties']['glac_21_Q1'] >= 1.0 and feature['properties']['glac_21_Q1'] <= 5.0:
-            return '#9cd9f3'
-        if feature['properties']['glac_21_Q1'] >= 6.0 and feature['properties']['glac_21_Q1'] <= 10.0:
-            return '#5abce6'
-        if feature['properties']['glac_21_Q1'] >= 11.0 and feature['properties']['glac_21_Q1'] <= 100.0:
-            return '#1f88b4'
-        else:
-            return 'transparent'
-
-    folium.GeoJson(mediambiente, 
-                    name="Glaciares",
-                    style_function = lambda feature: {
-                    'fillColor': getcolor(feature),
-                    'weight': 0,
-                    'fillOpacity': 0.8,},
-                    tooltip = folium.GeoJsonTooltip(fields=["NOM_REGION", "NOM_COMUNA", "glac_21_Q1"],
-                    aliases = ['Región', 'Comuna', 'Glaciar'],
-                    )
-    ).add_to(m)
-
-    template = """
-    {% macro html(this, kwargs) %}
-
-    <!doctype html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dataintelligence</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-    <script>
-    $( function() {
-        $( "#maplegend" ).draggable({
-                        start: function (event, ui) {
-                            $(this).css({
-                                right: "auto",
-                                top: "auto",
-                                bottom: "auto"
-                            });
-                        }
-                    });
-    });
-
-    </script>
-    </head>
-    <body>
-
-    
-    <div id='maplegend' class='maplegend' 
-        style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-        border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
+    for i, index in df.iterrows():
+        html="""
         
-    <div class='legend-title'>Glaciares</div>
-    <div class='legend-scale'>
-    <ul class='legend-labels'>
-        <li><span style='background:#9cd9f3;opacity:0.7;'></span>1 - 5</li>
-        <li><span style='background:#5abce6;opacity:0.7;'></span>6 - 10</li>
-        <li><span style='background:#1f88b4;opacity:0.7;'></span>11 - 100</li>
+        <style>
 
-    </ul>
-    </div>
-    </div>
-    
-    </body>
-    </html>
+            .chart-wrap {
+                --chart-width:400px;
+                --grid-color:#aaa;
+                --bar-color:#F16335;
+                --bar-thickness:30px;
+                --bar-rounded: 3px;
+                --bar-spacing:3px;
+                font-family:sans-serif;
+                width:var(--chart-width);
+            }
 
-    <style type='text/css'>
-    .maplegend .legend-title {
-        text-align: left;
-        margin-bottom: 5px;
-        font-weight: bold;
-        font-size: 90%;
-        }
-    .maplegend .legend-scale ul {
-        margin: 0;
-        margin-bottom: 5px;
-        padding: 0;
-        float: left;
-        list-style: none;
-        }
-    .maplegend .legend-scale ul li {
-        font-size: 80%;
-        list-style: none;
-        margin-left: 0;
-        line-height: 18px;
-        margin-bottom: 2px;
-        }
-    .maplegend ul.legend-labels li span {
-        display: block;
-        float: left;
-        height: 16px;
-        width: 30px;
-        margin-right: 5px;
-        margin-left: 0;
-        border: 1px solid #999;
-        }
-    .maplegend .legend-source {
-        font-size: 80%;
-        color: #777;
-        clear: both;
-        }
-    .maplegend a {
-        color: #777;
-        }
-    </style>
-    {% endmacro %}"""
+            .chart-wrap.horizontal .grid{
+                transform:rotate(-90deg);
+            }
 
-    macro = MacroElement()
-    macro._template = Template(template)
+            .chart-wrap.horizontal .bar::after{
+                transform: rotate(60deg);
+                padding-top:0px;
+                display: block;
+            }
 
-    m.get_root().add_child(macro)
+            .chart-wrap .bar {
+                width: var(--bar-value);
+                height:var(--bar-thickness);
+                margin:var(--bar-spacing) 0;
+                background-color:var(--bar-color);
+                border-radius:0 var(--bar-rounded) var(--bar-rounded) 0;
+            }
+        
+            .chart-wrap .bar::after{
+                content:attr(data-name);
+                margin-left:0%;
+                padding:10px;
+                display:inline-block;
+                white-space:nowrap;
+            }
 
-    return m._repr_html_()
+            .grid{
+                margin-top:-230px;
+            }
+        </style>
 
+        <div class="chart-wrap horizontal">
+            <div class="title"><strong><center>TEMPERATURA 2000 - 2020</center></strong></div>
+            <br>
+            <div class="title"><strong>REGIÓN: </strong>""" + df["NOM_REGION"][i] + """</div>
+            <div class="title"><strong>COMUNA: </strong>""" + df["NOM_COMUNA"][i] + """</div>
+            <br>
+            <div class="grid">
+                <div class='bar' style='--bar-value:""" + str(df["2020_01"][i]) + """%;' data-name='"""+ str(round(float(df["2020_01"][i]), 1)) + """' title='"""+ str(round(float(df["2020_01"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_02"][i]) + """%;' data-name='""" + str(round(float(df["2020_02"][i]), 1)) + """' title='""" + str(round(float(df["2020_02"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_03"][i]) + """%;' data-name='""" + str(round(float(df["2020_03"][i]), 1)) + """' title='""" + str(round(float(df["2020_03"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_04"][i]) + """%;' data-name='""" + str(round(float(df["2020_04"][i]), 1)) + """' title='""" + str(round(float(df["2020_04"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_05"][i]) + """%;' data-name='""" + str(round(float(df["2020_05"][i]), 1)) + """' title='""" + str(round(float(df["2020_05"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_06"][i]) + """%;' data-name='""" + str(round(float(df["2020_06"][i]), 1)) + """' title='""" + str(round(float(df["2020_06"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_07"][i]) + """%;' data-name='""" + str(round(float(df["2020_07"][i]), 1)) + """' title='""" + str(round(float(df["2020_07"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_08"][i]) + """%;' data-name='""" + str(round(float(df["2020_08"][i]), 1)) + """' title='""" + str(round(float(df["2020_08"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_09"][i]) + """%;' data-name='""" + str(round(float(df["2020_09"][i]), 1)) + """' title='""" + str(round(float(df["2020_09"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_10"][i]) + """%;' data-name='""" + str(round(float(df["2020_10"][i]), 1)) + """' title='""" + str(round(float(df["2020_10"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_11"][i]) + """%;' data-name='""" + str(round(float(df["2020_11"][i]), 1)) + """' title='""" + str(round(float(df["2020_11"][i]), 1)) + """'></div>
+                <div class='bar' style='--bar-value:""" + str(df["2020_12"][i]) + """%;' data-name='""" + str(round(float(df["2020_12"][i]), 1)) + """' title='""" + str(round(float(df["2020_12"][i]), 1)) + """'></div>
+            </div>
+        </div>
+
+        """
+        iframe = folium.IFrame(html=html, width=450, height=300)
+
+        # folium.CircleMarker(location=[df["latitude"][i],df["longitude"][i]], fill_color="#FF0000", radius=8, tooltip=df["NOM_COMUNA"][i], popup=folium.Popup(iframe)).add_to(_map)
+
+        popup = folium.Popup(iframe, max_width=2650)
+        folium.Marker(
+            location=[df["latitude"][i],df["longitude"][i]],
+            popup=popup,
+            tooltip="<strong>Parcela ID: </strong>" + str(df["Parcela_ID"][i]) + "<br>" + 
+            "<strong>Temperatura actual: </strong>" + str(round(float((df["2020_12"][i])), 1)) + "°" + 
+            "<br><strong>Latitud: </strong>" + str(df["latitude"][i]) + "<br>" +
+            "<strong>Longitud: </strong>" + str(df["longitude"][i]) + "<br>",
+            icon=folium.DivIcon(html=f"""
+                <div><svg>
+                    <circle cx='30' cy='30' r='10' fill='""" + df["Simbología"][i] + """' opacity='1'/> 
+                </svg></div>""")
+        ).add_to(_map)
+
+
+    folium.LayerControl().add_to(_map)
+
+    return _map._repr_html_()
 
 if __name__ == '__main__':
     app.run()
