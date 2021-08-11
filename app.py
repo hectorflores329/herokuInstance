@@ -128,9 +128,9 @@ def temp():
             "<br><strong>Latitud: </strong>" + str(df["latitude"][i]) + "<br>" +
             "<strong>Longitud: </strong>" + str(df["longitude"][i]) + "<br>",
             icon=folium.DivIcon(html=f"""
-                <div><svg>
+                <div>
                     <span style='color:""" + df["Simbología"][i] + """; font-size:80px;'>•</span>
-                </svg></div>""")
+                </div>""")
         ).add_to(_map)
 
 
